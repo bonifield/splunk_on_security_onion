@@ -1,4 +1,6 @@
-# splunk_on_security_onion
+# Splunk on Security Onion
+
+## If not on Security Onion, this REQUIRES that Zeek (Bro) produce logs in JSON format!
 
 - stop Splunk and place files where necessary
 ```
