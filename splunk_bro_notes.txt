@@ -72,7 +72,7 @@ sourcetype=bro_rdp | fillnull value=- | table _time uid src_ip dest_ip src_port 
 sourcetype=bro_sip | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port call_id method request_from response_to request_path response_path seq status_code status_msg uri user_agent content_type warning request_body_len response_body_len | sort -_time
 
 # bro_smb_files
-sourcetype=bro_smb_files | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action name path size times.accessed times.changed times.created times.modified | sort -_time
+sourcetype=bro_smb_files | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action name path size times_accessed times_changed times_created times_modified | sort -_time
 
 # bro_smb_mapping
 sourcetype=bro_smb_mapping | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port service share_type path native_file_system | sort -_time
