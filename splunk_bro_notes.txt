@@ -19,6 +19,8 @@ sourcetype=bro_capture_loss | fillnull value=- | table _time acks gaps peer perc
 
 
 
+# bro_dns
+sourcetype=bro_dns | fillnull value=- | table _time uid proto src_ip dest_ip src_port dest_port qtype_name query answers auth addl rcode_name rejected rtt qclass qclass_name qtype rcode AA TC RD RA Z | sort -_time
 # counts by host
 sourcetype=bro_dns | stats values(query) as query, dc(query) as distinct, count(query) as total by src_ip | sort -total
 # query stats by query
@@ -33,13 +35,8 @@ sourcetype=bro_dns | eval ctime = _time | sort 0 +ctime | streamstats global=f w
 # query stats by src_ip with logged time
 sourcetype=bro_dns | eval len_query = len(query), simple_date = strftime(_time, "%F") | stats min(len_query) as query_len_min, max(len_query) as query_len_max, median(len_query) as query_len_median, mode(len_query) as query_len_mode, count(query) as query_count by src_ip | eval [| makeresults | eval logged_timestamp = strftime(now(), "%x %X") | return logged_timestamp] | table logged_timestamp src_ip query_len_min query_len_max query_len_median query_len_mode query_count
 
-
-
 # bro_dce_rpc
 sourcetype=bro_dce_rpc | fillnull value=- | table _time ts uid src_ip dest_ip src_port dest_port endpoint named_pipe operation rtt | sort -_time
-
-# bro_dns
-sourcetype=bro_dns | fillnull value=- | table _time uid proto src_ip dest_ip src_port dest_port qtype_name query answers auth addl rcode_name rejected rtt qclass qclass_name qtype rcode AA TC RD RA Z | sort -_time
 
 # bro_dpd
 sourcetype=bro_dpd | fillnull value=- | table _time uid proto analyzer src_ip dest_ip src_port dest_port failure_reason | sort -_time
@@ -51,7 +48,7 @@ sourcetype=bro_files | fillnull value=- | table _time conn_uids fuid src_ip dest
 sourcetype=bro_ftp | fillnull value=- | table _time uid user command reply_code reply_msg mime_type arg file_size src_ip dest_ip src_port dest_port data_channel_src_ip data_channel_dest_ip data_channel_dest_port data_channel_passive fuid | sort -_time
 
 # bro_http
-sourcetype=bro_http | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port method status_code status_msg host uri user_agent referrer version proxied orig_mime_types resp_mime_types orig_filenames resp_filenames orig_fuids resp_fuids request_body_len response_body_len info_code info_msg | sort -_time
+sourcetype=bro_http | fillnull value=- | rex field=uri "\.(?<extension>[^\.]*$)" | table _time uid src_ip dest_ip src_port dest_port method status_code status_msg host http_host uri extension user_agent referrer version proxied orig_mime_types resp_mime_types orig_filenames resp_filenames orig_fuids resp_fuids request_body_len response_body_len info_code info_msg | sort -_time
 
 # bro_irc
 sourcetype=bro_irc | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port nick user command dcc_file_name dcc_file_size value | sort -_time
@@ -72,7 +69,7 @@ sourcetype=bro_rdp | fillnull value=- | table _time uid src_ip dest_ip src_port 
 sourcetype=bro_sip | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port call_id method request_from response_to request_path response_path seq status_code status_msg uri user_agent content_type warning request_body_len response_body_len | sort -_time
 
 # bro_smb_files
-sourcetype=bro_smb_files | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action name path size times_accessed times_changed times_created times_modified | sort -_time
+sourcetype=bro_smb_files | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action name path size times.accessed times.changed times.created times.modified | sort -_time
 
 # bro_smb_mapping
 sourcetype=bro_smb_mapping | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port service share_type path native_file_system | sort -_time
