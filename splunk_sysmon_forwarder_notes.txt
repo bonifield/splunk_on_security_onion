@@ -121,15 +121,18 @@ FORMAT = SHA256::$1
 #=============
 [sysmon]
 REPORT-sysmon = sysmon-eventid,sysmon-version,sysmon-level,sysmon-task,sysmon-opcode,sysmon-keywords,sysmon-created,sysmon-record,sysmon-correlation,sysmon-channel,sysmon-computer,sysmon-sid,sysmon-data,sysmon-md5,sysmon-sha1,sysmon-sha256,sysmon-imphash,sysmon-hashes,sysmon-filename,sysmon-registry
-
+FIELDALIAS-sysmon = Computer AS client_name DestinationIp AS dest_ip DestinationPort AS dest_port QueryName AS query SourceIp AS src_ip SourcePort AS src_port
 
 
 #=============
 # Install Sysmon on Endpoint
 #=============
-- make a config or use/modify the SwiftOnSecurity config (or other good options):  https://github.com/SwiftOnSecurity/sysmon-config
-sysmon.exe -i -n -accepteula
-sysmon -c sysmon-config.xml
+- put sysmon.exe / sysmon64.exe somewhere users don't have access to
+- make a config or use/modify the SwiftOnSecurity config (or other good options)
+- https://github.com/SwiftOnSecurity/sysmon-config/raw/master/sysmonconfig-export.xml
+- (with DNS settings that limit popular domains) https://github.com/SwiftOnSecurity/sysmon-config/raw/master/z-AlphaVersion.xml
+sysmon64.exe -i -n -accepteula
+sysmon64.exe -c sysmon-config.xml
 
 
 
