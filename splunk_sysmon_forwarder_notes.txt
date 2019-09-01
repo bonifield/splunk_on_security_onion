@@ -96,22 +96,21 @@ FORMAT = SecurityID::$1
 REGEX = <Data Name='(.*?)'>(.*?)</Data>
 FORMAT = $1::$2
 
-# 32 characters
 [sysmon-md5]
-REGEX = MD5=(*.?),
+REGEX = MD5\=([a-fA-F0-9]{32}?)
 FORMAT = MD5::$1
 
 [sysmon-sha1]
-REGEX = SHA1=(*.?),
+REGEX = SHA1\=([a-fA-F0-9]{40}?)
 FORMAT = SHA1::$1
 
 [sysmon-sha256]
-REGEX = =(*.?),
+REGEX = SHA256\=([a-fA-F0-9]{64}?)
 FORMAT = SHA256::$1
 
-#[sysmon-dns]
-#REGEX = <></>
-#FORMAT = ::
+[sysmon-imphash]
+REGEX = IMPHASH\=([a-fA-F0-9]{32}?)
+FORMAT = IMPHASH::$1
 
 
 
@@ -122,6 +121,7 @@ FORMAT = SHA256::$1
 [sysmon]
 REPORT-sysmon = sysmon-eventid,sysmon-version,sysmon-level,sysmon-task,sysmon-opcode,sysmon-keywords,sysmon-created,sysmon-record,sysmon-correlation,sysmon-channel,sysmon-computer,sysmon-sid,sysmon-data,sysmon-md5,sysmon-sha1,sysmon-sha256,sysmon-imphash,sysmon-hashes,sysmon-filename,sysmon-registry
 FIELDALIAS-sysmon = Computer AS client_name DestinationIp AS dest_ip DestinationPort AS dest_port QueryName AS query SourceIp AS src_ip SourcePort AS src_port
+
 
 
 #=============
