@@ -133,6 +133,8 @@ FIELDALIAS-sysmon = Computer AS client_name DestinationIp AS dest_ip Destination
 - (with DNS settings that limit popular domains) https://github.com/SwiftOnSecurity/sysmon-config/raw/master/z-AlphaVersion.xml
 sysmon64.exe -i -n -accepteula
 sysmon64.exe -c sysmon-config.xml
+OR over the network
+\\ServerName\sysmon -i -n -accepteula
 
 
 
