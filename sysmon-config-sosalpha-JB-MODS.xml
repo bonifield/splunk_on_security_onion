@@ -8,8 +8,8 @@
 	- commented out csrss.exe, services.exe, and winlogon.exe in Event ID 8 exclusions (will test)
 	- enabled all logging for Event ID 9
 	- added lsass.exe and winlogon.exe to the include statements in Event ID 10
-	- added .sh and .py to the include statements in Event ID 11
-	- added .sh and .py to the include statements in Event ID 15
+	- added .js, .sh, and .py to the include statements in Event ID 11
+	- added .js, .sh, and .py to the include statements in Event ID 15
 	- enabled all logging for Event IDs 17 and 18
 
 -->
@@ -532,6 +532,7 @@
 			<TargetFilename condition="end with">.pptm</TargetFilename> <!--Microsoft:Office:Word: Macro-->
 			<TargetFilename condition="end with">.py</TargetFilename> <!--Python -->
 			<TargetFilename condition="end with">.sh</TargetFilename> <!--Shell -->
+			<TargetFilename condition="end with">.js</TargetFilename> <!--JavaScript -->
 			<TargetFilename condition="end with">.ps1</TargetFilename> <!--PowerShell [ More information: http://www.hexacorn.com/blog/2014/08/27/beyond-good-ol-run-key-part-16/ ] -->
 			<TargetFilename condition="end with">.sys</TargetFilename> <!--System driver files-->
 			<TargetFilename condition="end with">.scr</TargetFilename> <!--System driver files-->
@@ -833,6 +834,7 @@
 			<TargetFilename condition="end with">.ps2</TargetFilename> <!--PowerShell-->
 			<TargetFilename condition="end with">.py</TargetFilename> <!--Python-->
 			<TargetFilename condition="end with">.sh</TargetFilename> <!--Shell-->
+			<TargetFilename condition="end with">.js</TargetFilename> <!--JavaScript-->
 			<TargetFilename condition="end with">.reg</TargetFilename> <!--Registry File-->
 			<TargetFilename condition="end with">.jse</TargetFilename> <!--Registry File-->
 			<TargetFilename condition="end with">.vb</TargetFilename> <!--VisualBasicScripting files-->
