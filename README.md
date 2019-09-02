@@ -26,6 +26,7 @@
 	- Do you really need full PCAP for everything, or can you shorten how long files are saved?
 - The size of the network you are collecting from
 	- Does your Security Onion have enough resources?
+		- Zeek and Splunk may need to be tuned individually
 	- Can you transport all of those logs across the network without impacting your business operations?
 - Log data relevance
 	- The Sysmon configuration here is very wide open, moreso thatn the SwiftOnSecurity alpha config.
