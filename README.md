@@ -15,6 +15,7 @@
 
 ### What This IS NOT:
 - A perfect solution
+- Splunk Dashboards 101 (though a basic one is included in my helpers folder)
 - An application (sure, apps are easy, but they don't show me how or why they work)
 - A finished project (Snort and OSSEC parsers aren't included, nor even finished, as of this writing)
 - A Splunk license (use the free one for your home lab)
@@ -23,11 +24,13 @@
 ### If using Ubuntu and not Security Onion, this requires that Zeek (Bro) produce logs in JSON format, and the monitor paths be changed as necessary in the server's inputs.conf file.  Otherwise, all configurations should work exactly the same.
 
 ### TODO
+- Field modifications:  CEF compliance, better extractions (index-time and search-time), MORE extractions/fixes as needed (there are definitely some I missed)
 - Create scripts and/or GPOs to install the forwarders across a network
 - Actually utilize Splunk's ability to create new (non-default) certificates when deploying to hosts
 - Add hardening guide (unlikely)
 - Repo for Win/Sysmon on ELK, the exact reverse of this project
-- Field modifications:  CEF compliance, better extractions (index-time and search-time), MORE extractions/fixes as needed (there are definitely some I missed)
+- Snort and OSSEC parsers
+- Custom Python scripts that enrich the indexes, provide lookups, API calls, etc 
 - Visual map of how these configs interact with each other
 
 ## INSTRUCTIONS
@@ -123,3 +126,7 @@ sudo splunk clean eventdata -index [index]
 Search Bar --> type (yes with a leading pipe)		| extract reload=T
 sudo /opt/splunk/bin/splunk restart
 ```
+
+Image = official term for a compiled binary file
+Subject_* = the one performing the action in question
+Target_* and User_* = the one being acted upon by the Subject
