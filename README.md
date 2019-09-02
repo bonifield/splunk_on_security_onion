@@ -7,11 +7,13 @@
 - Provide all necessary configuration files, and all necessary commands in a streamlined set of instructions
 
 ### What This IS:
-- A manual, but streamlined, method of installing and configuring Splunk on a standalone instance of Security Onion
-- A series of configuration files, and instructions on where to put them
+- A manual, but streamlined, method of installing and configuring Splunk on a standalone instance of Security Onion to receive Zeek, Sysmon, and Windows Event logs (Application, Security, System)
+	- A series of very clear configuration files, and instructions on where to put them
+	- A series of instructions that work across Debian-based Linux builds (Debian, Ubuntu, Security Onion, etc)
 - A fully functional project (note points below as to what is not yet included)
 - A pet project
-- A series of instructions that work across Debian-based Linux builds (Debian, Ubuntu, Security Onion, etc)
+- A work in progress
+
 
 ### What This IS NOT:
 - A perfect solution
