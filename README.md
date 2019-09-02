@@ -119,11 +119,12 @@ sudo splunk stop
 sudo splunk list index
 sudo splunk clean eventdata -index _thefishbucket
 sudo splunk clean eventdata -index [index]
+sudo splunk start
 ```
 - Force Splunk to recognize new changes to props.conf and/or transforms.conf
 	- Try these things IN THIS ORDER
 ```
-Search Bar --> type (yes with a leading pipe)		| extract reload=T
+Search Bar --> type (yes with a leading pipe)	| extract reload=T
 sudo /opt/splunk/bin/splunk restart
 ```
 
