@@ -7,6 +7,7 @@
 	- handles sourcetype and field formatting, and field reporting ("send this field with this transforms.conf formatting to Splunk)
 - transforms.conf
 	- handles field extractions and transforms (re-arranging, etc)
+	- portions of the Sysmon section derived from this [Splunk blog](https://www.splunk.com/blog/2014/11/24/monitoring-network-traffic-with-sysmon-and-splunk.html)
 
 ### optionally installed through the Splunk web GUI
 - conn_state_table.csv
