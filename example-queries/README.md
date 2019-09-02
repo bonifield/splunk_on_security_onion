@@ -1,4 +1,6 @@
 # files with example Splunk queries
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+
 ### TODO - paste those queries here, instead of inside individual files
 
 ### Randoms
