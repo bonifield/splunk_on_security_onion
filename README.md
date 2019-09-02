@@ -21,6 +21,17 @@
 - A Splunk license (use the free one for your home lab)
 - A series of instructions for RHEL/CentOS/Fedora/etc.  This is for Security Onion specifically, but it works just as well (identically) on Ubuntu.
 
+### Considerations:
+- The amount of storage you have available
+	- Do you really need full PCAP for everything, or can you shorten how long files are saved?
+- The size of the network you are collecting from
+	- Does your Security Onion have enough resources?
+	- Can you transport all of those logs across the network without impacting your business operations?
+- Log data relevance
+	- The Sysmon configuration here is very wide open, moreso thatn the SwiftOnSecurity alpha config.
+		- Do you want to make a wide-open anything-goes config?  Do you want even more restrictions?
+		- Do you *need* specific logs, i.e. Application, certain Zeek logs, etc?
+
 ### If using Ubuntu and not Security Onion, this requires that Zeek (Bro) produce logs in JSON format, and the monitor paths be changed as necessary in the server's inputs.conf file.  Otherwise, all configurations should work exactly the same.
 
 ### TODO
