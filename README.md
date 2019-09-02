@@ -46,6 +46,7 @@
 - Snort and OSSEC parsers
 - Custom Python scripts that enrich the indexes, provide lookups, API calls, etc 
 - Visual map of how these configs interact with each other
+- Automate or containerize
 
 ## INSTRUCTIONS
 
