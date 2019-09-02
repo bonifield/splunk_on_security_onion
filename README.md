@@ -127,6 +127,6 @@ Search Bar --> type (yes with a leading pipe)		| extract reload=T
 sudo /opt/splunk/bin/splunk restart
 ```
 
-Image = official term for a compiled binary file
-Subject_* = the one performing the action in question
-Target_* and User_* = the one being acted upon by the Subject
+- Image = official term for a compiled binary file
+- Subject_* = the one performing the action in question
+- Target_* and User_* = the one being acted upon by the Subject
