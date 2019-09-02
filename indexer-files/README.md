@@ -1,4 +1,4 @@
-# Files that get installed on the SPLUNK SERVER (Security Onion)
+# Files that get installed on the SPLUNK INDEXER (Security Onion)
 
 ### installed during the instructions in the main folder
 - inputs.conf
