@@ -1,3 +1,5 @@
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+
 # VIEW FIELDS
 sourcetype=bro_dce_rpc | fields - date* punct splunk_* | fieldsummary | fields field values
 
@@ -5,10 +7,14 @@ sourcetype=bro_dce_rpc | fields - date* punct splunk_* | fieldsummary | fields f
 
 # internal only
 | where cidrmatch("10.0.0.0/8", src_ip) AND cidrmatch("10.0.0.0/8", dest_ip)
-in token - &quot;
+
+quotes in a token - &quot;
+circle with a slash, good hide icon for dashboards:  eval hide = "&#8856;"
 
 # first hits
 | stats sparkline(count) AS trend, earliest(_time) AS first_hit, latest(_time) AS latest_hit, count by FIELD-GOES-HERE | eval first_hit=strftime(first_hit, "%x %X"), latest_hit=strftime(latest_hit, "%x %X"), hide = "&#8856;"
+
+#====================
 
 # bro_conn
 sourcetype=bro_conn | fillnull value=- | table _time uid proto service src_ip dest_ip src_port dest_port conn_state conn_state_description history 
@@ -17,23 +23,9 @@ orig_bytes resp_bytes orig_ip_bytes resp_ip_bytes orig_pkts resp_pkts missed_byt
 # bro_capture_loss
 sourcetype=bro_capture_loss | fillnull value=- | table _time acks gaps peer percent_lost ts_delta | sort -percent_lost
 
-
-
 # bro_dns
 sourcetype=bro_dns | fillnull value=- | table _time uid proto src_ip dest_ip src_port dest_port qtype_name query answers auth addl rcode_name rejected rtt qclass qclass_name qtype rcode AA TC RD RA Z | sort -_time
 # counts by host
-sourcetype=bro_dns | stats values(query) as query, dc(query) as distinct, count(query) as total by src_ip | sort -total
-# query stats by query
-sourcetype=bro_dns | eval len_query = len(query) | stats min(len_query) as len_min, max(len_query) as len_max, median(len_query) as len_median, mode(len_query) as len_mode, count(query) as count by query
-# query stats by src_ip
-sourcetype=bro_dns | eval len_query = len(query) | stats min(len_query) as query_len_min, max(len_query) as query_len_max, median(len_query) as query_len_median, mode(len_query) as query_len_mode, count(query) as query_count by src_ip
- | eval logged_timestamp = strftime(now(), "%x %X") | table logged_timestamp
-
-# time between requests by host with logged time
-sourcetype=bro_dns | eval ctime = _time | sort 0 +ctime | streamstats global=f window=2 current=f last(ctime) as prev_time by src_ip | eval diff = ctime - prev_time | eval [| makeresults | eval logged_timestamp = strftime(now(), "%x %X") | return logged_timestamp]  | table logged_timestamp src_ip ctime prev_time diff
-
-# query stats by src_ip with logged time
-sourcetype=bro_dns | eval len_query = len(query), simple_date = strftime(_time, "%F") | stats min(len_query) as query_len_min, max(len_query) as query_len_max, median(len_query) as query_len_median, mode(len_query) as query_len_mode, count(query) as query_count by src_ip | eval [| makeresults | eval logged_timestamp = strftime(now(), "%x %X") | return logged_timestamp] | table logged_timestamp src_ip query_len_min query_len_max query_len_median query_len_mode query_count
 
 # bro_dce_rpc
 sourcetype=bro_dce_rpc | fillnull value=- | table _time ts uid src_ip dest_ip src_port dest_port endpoint named_pipe operation rtt | sort -_time
@@ -98,19 +90,3 @@ sourcetype=bro_tunnel | fillnull value=- | table _time uid src_ip dest_ip src_po
 
 # bro_weird
 sourcetype=bro_weird | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port notice name peer | sort -_time
-
-
-
-
-
-# bro_known_certs
-bro_known_certs
-
-# bro_known_hosts
-sourcetype=bro_known_hosts
-
-# bro_known_services
-sourcetype=bro_known_services
-
-# bro_known_entities
-bro_known_entities
