@@ -17,6 +17,7 @@
 
 ### What This IS NOT:
 - A perfect solution
+- A solution that uses intermediate forwarders; this is one of many lab setups, though intermediate forwarders would greatly enhance the function, and security, of this project
 - Splunk Dashboards 101 (though a basic one is included in my helpers folder)
 - An application (sure, apps are easy, but they don't show me how or why they work)
 - A finished project (Snort and OSSEC parsers aren't included, nor even finished, as of this writing)
@@ -42,6 +43,7 @@
 - Create scripts and/or GPOs to install the forwarders across a network
 - Actually utilize Splunk's ability to create new (non-default) certificates when deploying to hosts
 - Add hardening guide (unlikely)
+- Intermediate forwarders (because the whole network does NOT need direct access to Security Onion...)
 - Repo for Win/Sysmon on ELK, the exact reverse of this project
 - Snort and OSSEC parsers
 - Custom Python scripts that enrich the indexes, provide lookups, API calls, etc 
