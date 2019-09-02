@@ -24,32 +24,32 @@
 - New_Logon_* = the account for whom the new logon was created, i.e. the account logged on
 
 ### Windows Event Logs - Security
-Message_Title
+- Message_Title
 	- the first summarizing sentence in the log describing the event
-Process_ID_Number
+- Process_ID_Number
 	- int value
-Subject_Security_ID
-Subject_Account_Name
-Subject_Account_Domain
-Subject_Account_Logon_ID
+- Subject_Security_ID
+- Subject_Account_Name
+- Subject_Account_Domain
+- Subject_Account_Logon_ID
 	- hex value
-Subject_Account_Logon_ID_Number
+- Subject_Account_Logon_ID_Number
 	- int value
-Target_Security_ID
-Target_Account_Name
-Target_Account_Domain
-User_Security_ID
-User_Account_Name
-User_Account_Domain
-New_Logon_Security_ID
-New_Logon_Account_Name
-New_Logon_Account_Domain
-New_Logon_ID
+- Target_Security_ID
+- Target_Account_Name
+- Target_Account_Domain
+- User_Security_ID
+- User_Account_Name
+- User_Account_Domain
+- New_Logon_Security_ID
+- New_Logon_Account_Name
+- New_Logon_Account_Domain
+- New_Logon_ID
 	- hex value
-New_Logon_ID_Number
+- New_Logon_ID_Number
 	- int value
-New_Logon_Linked_ID
+- New_Logon_Linked_ID
 	- hex value
-New_Logon_Linked_ID_Number
+- New_Logon_Linked_ID_Number
 	- int value
-New_Logon_GUID
+- New_Logon_GUID
