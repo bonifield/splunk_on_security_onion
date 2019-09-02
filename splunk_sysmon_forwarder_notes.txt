@@ -44,6 +44,17 @@ sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
 # Add to /opt/splunk/etc/system/local/transforms.conf ON THE INDEXER
 # sudo nano /opt/splunk/etc/system/local/transforms.conf
 #=============
+
+# transforms.conf BEGINS BELOW THIS LINE
+
+
+
+
+
+#=============
+# Sysmon
+#=============
+
 [sysmon-eventid]
 REGEX = <EventID>(\d+)</EventID>
 FORMAT = EventCode::$1
@@ -112,6 +123,59 @@ FORMAT = SHA256::$1
 REGEX = IMPHASH\=([a-fA-F0-9]{32}?)
 FORMAT = IMPHASH::$1
 
+#=============
+# Windows Event Log - Security
+#=============
+
+[winsec-messagetitle]
+REGEX = Message\=(.*?)\.
+FORMAT = Message_Title::$1
+
+[winsec-subjectsecurityid]
+REGEX = Subject[:\s]+Security ID[:\s]+([\S]+[^\s\r\n])
+FORMAT = Subject_Security_ID::$1
+
+[winsec-subjectaccountname]
+REGEX = Subject[\s\S]+?Account Name[:\s]+([\S]+[^\s\r\n])
+FORMAT = Subject_Account_Name::$1
+
+[winsec-subjectaccountdomain]
+REGEX = Subject[\s\S]+?Account Domain[:\s]+([\S]+[^\s\r\n])
+FORMAT = Subject_Account_Domain::$1
+
+[winsec-subjectaccountlogonid]
+REGEX = Subject[\s\S]+?Logon ID[:\s]+([\S]+[^\s\r\n])
+FORMAT = Subject_Account_Logon_ID::$1
+
+[winsec-targetaccountid]
+REGEX = Target Account[\s\S]+?Security ID[:\s]+([\S]+[^\s\r\n])
+FORMAT = Target_Security_ID::$1
+
+[winsec-targetaccountname]
+REGEX = Target Account[\s\S]+?Account Name[:\s]+([\S]+[^\s\r\n])
+FORMAT = Target_Account_Name::$1
+
+[winsec-targetaccountdomain]
+REGEX = Target Account[\s\S]+?Account Domain[:\s]+([\S]+[^\s\r\n])
+FORMAT = Target_Account_Domain::$1
+
+[winsec-useraccountid]
+REGEX = User:[\s\S]+?Security ID[:\s]+([\S]+[^\s\r\n])
+FORMAT = User_Security_ID::$1
+
+[winsec-useraccountname]
+REGEX = User:[\s\S]+?Account Name[:\s]+([\S]+[^\s\r\n])
+FORMAT = User_Account_Name::$1
+
+[winsec-useraccountdomain]
+REGEX = User:[\s\S]+?Account Domain[:\s]+([\S]+[^\s\r\n])
+FORMAT = User_Account_Domain::$1
+
+
+
+
+
+# transforms.conf ENDS ABOVE THIS LINE
 
 
 #=============
@@ -122,6 +186,8 @@ FORMAT = IMPHASH::$1
 REPORT-sysmon = sysmon-eventid,sysmon-version,sysmon-level,sysmon-task,sysmon-opcode,sysmon-keywords,sysmon-created,sysmon-record,sysmon-correlation,sysmon-channel,sysmon-computer,sysmon-sid,sysmon-data,sysmon-md5,sysmon-sha1,sysmon-sha256,sysmon-imphash,sysmon-hashes,sysmon-filename,sysmon-registry
 FIELDALIAS-sysmon = Computer AS client_name DestinationIp AS dest_ip DestinationPort AS dest_port QueryName AS query SourceIp AS src_ip SourcePort AS src_port
 
+[winsec]
+REPORT-winsec = winsec-messagetitle,winsec-subjectsecurityid,winsec-subjectaccountname,winsec-subjectaccountdomain,winsec-subjectaccountlogonid,winsec-targetaccountid,winsec-targetaccountname,winsec-targetaccountdomain,winsec-useraccountid,winsec-useraccountname,winsec-useraccountdomain
 
 
 #=============
