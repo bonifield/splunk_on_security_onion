@@ -31,8 +31,25 @@
 
 ## INSTRUCTIONS
 
-
-
-
-
-
+- Install Security Onion, DO NOT ENABLE ELK WHEN PROMPTED DURING THE THIRD SETUP PHASE
+  - Make sure your storage capabilities are pretty solid, or just turn off full PCAP if it's not important to you
+- Install Splunk
+```
+sudo dpkg -i [yoursplunkfile].deb
+sudo /opt/splunk/bin/splunk start
+```
+- Log into the Splunk GUI, and configure the server to use HTTPS
+```
+Settings --> Server Settings --> General Settings --> Enable SSL (HTTPS) in Splunk Web? --> YES
+```
+- Log back into Splunk and create three new indexes: bro, sysmon, and winevt
+  - Change other options as desired, but it's extremely unlikely you won't need to for a home/small business setting
+```
+Settings --> Indexes --> New Index --> Index Name:  bro --> Save
+                         New Index --> Index Name:  sysmon --> Save
+                         New Index --> Index Name:  winevt --> Save
+```
+- Add a Receiving Port for Splunk to ingest logs from other hosts
+```
+Splunk --> Settings --> Forwarding and receiving --> Configure receiving --> + Add New --> 9997 --> Save
+```
