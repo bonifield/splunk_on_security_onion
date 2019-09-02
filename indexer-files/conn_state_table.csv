@@ -1,0 +1,14 @@
+conn_state,conn_state_description
+S0,"Connection attempt, no reply"
+S1,"Connection established, not terminated (0 byte counts)"
+SF,Normal established and termination (>0 byte counts)
+REJ,Connection attempt rejected
+S2,"Established, Orig attempts close, no reply from Resp"
+S3,"Established, Resp attempts close, no reply from Orig"
+RSTO,"Established, Orig aborted with RST"
+RSTR,"Established, Resp aborted with RST"
+RSTOS0,Orig sent SYN then RST; no Resp SYN-ACK
+RSTRH,Resp sent SYN-ACK then RST; no Orig SYN
+SH,"Orig sent SYN then FIN; no Resp SYN-ACK (""half-open"")"
+SHR,Resp sent SYN-ACK then FIN; no Orig SYN
+OTH,"No SYN, not closed; midstream traffic, partial connection"
