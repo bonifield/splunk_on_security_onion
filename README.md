@@ -92,7 +92,7 @@ sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
 - Place transforms.conf on the indexer
 	- /opt/splunk/etc/system/local/transforms.conf
 
-## If you are going to use an Intermediate Forwarder to relay logs, vs allowing all of your hosts to directly access Security Onion, [read the instructions here](https://github.com/bonifield/splunk_on_security_onion/tree/master/indexer-files), and don't forget to change your endpoint outputs.conf IP addresses to the Intermediate Forwarder.
+## If you are going to use an Intermediate Forwarder to relay logs, vs allowing all of your hosts to directly access Security Onion, [read the instructions here](https://github.com/bonifield/splunk_on_security_onion/tree/master/intermediateforwarder-files), and don't forget to change your endpoint outputs.conf IP addresses to the Intermediate Forwarder.
 
 ### On Endpoints
 - Place [sysmon](https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon) on the host, somewhere users don't have access to (NOT C:\Users)
