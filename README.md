@@ -113,6 +113,9 @@ msiexec.exe /i [yoursplunkforwarder].msi RECEIVING_INDEXER="INDEXER_IP_ADDRESS:9
 ```
 - Place inputs.conf (the endpoint version) on the host (don't forget that spaces in filepaths are lame...)
 	- "C:/Program Files/SplunkUniversalForwarder/etc/system/local/inputs.conf"
+- Place inputs.conf (the endpoint version) on the host
+	- "C:/Program Files/SplunkUniversalForwarder/etc/system/local/outputs.conf"
+		- substitute IPs as necessary for your indexer
 - Start (or restart) the Forwarder
 ```
 "C:\Program Files\SplunkUniversalForwarder\bin>splunk.exe" start
