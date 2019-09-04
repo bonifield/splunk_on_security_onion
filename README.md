@@ -79,7 +79,7 @@ Settings --> Access Controls --> Roles --> [role] --> Indexes tab --> select the
 ```
 Splunk --> Settings --> Forwarding and receiving --> Configure receiving --> + Add New --> 9997 --> Save
 ```
-- Configure UFW (firewall) to allow forwarded logs to the Receiver
+- Configure UFW (firewall) to allow forwarded logs (from endpoints or Intermediate Forwarder, see below) to the Receiver
 ```
 sudo ufw allow 9997/tcp
 OR
