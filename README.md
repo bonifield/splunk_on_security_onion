@@ -43,7 +43,7 @@
 - Create scripts and/or GPOs to install the forwarders across a network
 - Actually utilize Splunk's ability to create new (non-default) certificates when deploying to hosts
 - Add hardening guide (unlikely)
-- Intermediate forwarders (because the whole network does NOT need direct access to Security Onion...)
+- ~~Intermediate forwarders (because the whole network does NOT need direct access to Security Onion...)~~
 - Repo for Win/Sysmon on ELK, the exact reverse of this project
 - Snort and OSSEC parsers
 - Custom Python scripts that enrich the indexes, provide lookups, API calls, etc 
