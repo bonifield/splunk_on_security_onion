@@ -15,6 +15,12 @@ sudo dpkg -i [splunkforwarder].deb
 - Place outputs.conf (the IntFwd version) on the IntFwd server
 	- /opt/splunk/etc/system/local/outputs.conf
 		- substitute IPs as necessary for your indexer
+- Configure UFW (firewall) to allow forwarded logs to the Intermediate Forwarder
+```
+sudo ufw allow 9997/tcp
+OR
+sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
+```
 - Start Splunk
 ```
 sudo /opt/splunk/bin/splunk start
