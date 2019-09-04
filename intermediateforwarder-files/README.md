@@ -19,6 +19,7 @@ sudo dpkg -i [splunkforwarder].deb
 ```
 sudo /opt/splunk/bin/splunk start
 ```
+- Proceeed to install the endpoint configurations
 
 ### ON ENDPOINTS
 
