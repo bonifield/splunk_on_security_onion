@@ -32,6 +32,8 @@ sudo /opt/splunk/bin/splunk start
 - Follow the main instructions, but modify the endpoint's outputs.conf file to reflect the IntFwd IPs
 
 ### IF YOU HAVE MULTIPLE INTERFACES ON THE INTERMEDIATE FORWARDER
+
+- Helpful route commands
 ```
 sudo ip route add [NET_IP_ADDRESS]/[CIDR] dev [YOUR_NET_FACING_INTERFACE]
 sudo ip route add [INDEXER_IP_ADDRESS]/32 dev [YOUR_INDEXER_FACING_INTERFACE]
