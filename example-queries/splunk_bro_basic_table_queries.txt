@@ -82,8 +82,7 @@ sourcetype=bro_software | fillnull value=- | table _time src_ip src_port name so
 sourcetype=bro_ssh | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port client server auth_attempts hassh hasshServer host_key cipher_alg compression_alg cshka hasshAlgorithms hasshServerAlgorithms hasshVersion host_key_alg kex_alg ma_alg sshka version | sort -_time
 
 # bro_ssl
-sourcetype=bro_ssl | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port version validation_status subject issuer established resumed ja3 ja3s curve cert_chain_fuids client_cert_chain_fuids | sort -_time
-| stats count by validation_status
+sourcetype=bro_ssl OR (sourcetype=bro_notice msg="*SSL*") | fillnull value=- | eval array = split(server_name,"."), server_name_subdomain = mvjoin(mvindex(array,0,-3),"."), server_name_domain = mvjoin(mvindex(array,-2,-1),"."), server_name_tld = if(mvcount(array)>=2,mvindex(array,-1),"-") | table _time sourcetype uid src_ip dest_ip src_port dest_port version server_name note msg sub server_name_subdomain server_name_domain server_name_tld last_alert validation_status client_subject subject client_issuer issuer established resumed ja3 ja3s curve cert_chain_fuids client_cert_chain_fuids | sort -_time
 
 # bro_tunnel
 sourcetype=bro_tunnel | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action tunnel_type | sort -_time
