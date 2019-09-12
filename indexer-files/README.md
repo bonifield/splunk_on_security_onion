@@ -31,7 +31,7 @@
 - Subject_Security_ID
 - Subject_Account_Name
 - Subject_Account_Domain
-- Subject_Account_Logon_ID
+- Subject_Logon_ID
 	- hex value
 - Subject_Account_Logon_ID_Number
 	- int value
