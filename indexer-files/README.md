@@ -56,3 +56,8 @@
 - New_Logon_Linked_ID_Number
 	- int value
 - New_Logon_GUID
+- Group_Security_ID
+- Group_Name
+- Group_Domain
+- Locked_Security_ID
+- Locked_Account_Name
