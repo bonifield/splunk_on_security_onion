@@ -41,6 +41,9 @@
 - User_Security_ID
 - User_Account_Name
 - User_Account_Domain
+- New_Account_Security_ID
+- New_Account_Name
+- New_Account_Domain
 - New_Logon_Security_ID
 - New_Logon_Account_Name
 - New_Logon_Account_Domain
