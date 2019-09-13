@@ -109,7 +109,7 @@ sysmon -c sysmon-config-sosalpha-JB-MODS.xml
 ```
 - Place the Universal Forwarder on the host and install it silently
 	- Substitute INDEXER_IP_ADDRESS for your Splunk's network address
-	- remove SERVICESTARTTYPE to make the forwarder automatically start; you'll have to manually restart it though after moving the configuration files and after every reboot (see further down for making it start automatically on boot)
+	- remove SERVICESTARTTYPE to make the forwarder automatically start after install, which is less optimal for scripts but convenient for single, step-by-step installs
 ```
 msiexec.exe /i [yoursplunkforwarder].msi RECEIVING_INDEXER="INDEXER_IP_ADDRESS:9997" SERVICESTARTTYPE=manual AGREETOLICENSE=Yes /quiet
 ```
