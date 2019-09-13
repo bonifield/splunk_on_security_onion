@@ -109,17 +109,18 @@ sysmon -c sysmon-config-sosalpha-JB-MODS.xml
 ```
 - Place the Universal Forwarder on the host and install it silently
 	- Substitute INDEXER_IP_ADDRESS for your Splunk's network address
-	- remove SERVICESTARTTYPE to make the forwarder automatically start; you'll have to manually restart it though after moving the configuration files
+	- remove SERVICESTARTTYPE to make the forwarder automatically start; you'll have to manually restart it though after moving the configuration files and after every reboot (see further down for making it start automatically on boot)
 ```
-msiexec.exe /i [yoursplunkforwarder].msi RECEIVING_INDEXER="INDEXER_IP_ADDRESS:9997" WINEVENTLOG_APP_ENABLE=1 WINEVENTLOG_SEC_ENABLE=1 WINEVENTLOG_SYS_ENABLE=1 SERVICESTARTTYPE=manual AGREETOLICENSE=Yes /quiet
+msiexec.exe /i [yoursplunkforwarder].msi RECEIVING_INDEXER="INDEXER_IP_ADDRESS:9997" SERVICESTARTTYPE=manual AGREETOLICENSE=Yes /quiet
 ```
 - Place inputs.conf (the endpoint version) on the host (don't forget that spaces in filepaths are lame...)
 	- "C:/Program Files/SplunkUniversalForwarder/etc/system/local/inputs.conf"
 - Place outputs.conf (the endpoint version) on the host
 	- "C:/Program Files/SplunkUniversalForwarder/etc/system/local/outputs.conf"
 		- substitute IPs as necessary for your indexer
-- Start (or restart) the Forwarder
+- Configure the Forwarder to start automatically on boot, then start (or restart) the Forwarder
 ```
+sc config SplunkForwarder start=auto
 "C:\Program Files\SplunkUniversalForwarder\bin>splunk.exe" start
 ```
 - Verify Splunk is both receiving logs from Windows endpoints, and indexing local Zeek (Bro) logs
