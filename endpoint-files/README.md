@@ -5,12 +5,22 @@
 	- tells the Splunk Universal Forwarder what local files to send over the network to Splunk
 	- modify the \[default\] host stanza to change the hostname (could script this, generate for each host then deploy, etc)
 - outputs.conf
-  - tells the Forwarder where to send files (the server location)
-  - you should NOT have to configure this; just double check during the install process that it looks right
+	- tells the Forwarder where to send files (the server location)
+	- you should NOT have to configure this; just double check during the install process that it looks right
 - sysmon-config-sosalpha-JB-MODS.xml
-  - the Sysmon configuration, derived from [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)
+	- the Sysmon configuration, derived from [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)
  
- Don't forget to make the service start automatically:
- ```
- sc config SplunkForwarder start=auto
- ```
+### Don't forget to make the service start automatically:
+```
+sc config SplunkForwarder start=auto
+```
+ 
+### Extra - enable PS logging via GPO
+```
+Group Policy Editor --> Computer Configuration --> Administrative Templates --> Windows Components --> Windows PowerShell
+	- Module Logging --> Edit --> Enabled
+		- Module Names --> Show
+			- Add:  *=*
+	- Turn On PowerShell Script Block Logging --> Edit --> Enabled
+	- Turn On PowerShell Transcription --> Edit --> Enabled
+```
