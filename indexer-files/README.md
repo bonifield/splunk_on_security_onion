@@ -42,8 +42,11 @@
 - User_Account_Name
 - User_Account_Domain
 - New_Account_Security_ID
+	- also included new Computer accounts
 - New_Account_Name
+	- also included new Computer accounts
 - New_Account_Domain
+	- also included new Computer accounts
 - New_Logon_Security_ID
 - New_Logon_Account_Name
 - New_Logon_Account_Domain
@@ -61,3 +64,7 @@
 - Group_Domain
 - Locked_Security_ID
 - Locked_Account_Name
+
+### Windows Event Logs - PowerShell
+- ScriptBlock
+- ScriptBlockID
