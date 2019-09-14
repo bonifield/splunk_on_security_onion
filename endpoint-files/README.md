@@ -9,3 +9,8 @@
   - you should NOT have to configure this; just double check during the install process that it looks right
 - sysmon-config-sosalpha-JB-MODS.xml
   - the Sysmon configuration, derived from [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)
+ 
+ Don't forget to make the service start automatically:
+ ```
+ sc config SplunkForwarder start=auto
+ ```
