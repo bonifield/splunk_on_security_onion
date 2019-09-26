@@ -9,6 +9,8 @@
 	- you should NOT have to configure this; just double check during the install process that it looks right
 - sysmon-config-sosalpha-JB-MODS.xml
 	- the Sysmon configuration, derived from [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)
+- sysmon-config-sosalpha-JB-MODS-allnetwork.xml
+	- same as above, but with *all* network connections enabled (this will generate a LOT of logs)
  
 ### Don't forget to make the service start automatically:
 ```
