@@ -32,7 +32,7 @@
 		- Zeek and Splunk may need to be tuned individually
 	- Can you transport all of those logs across the network without impacting your business operations?
 - Log data relevance
-	- The Sysmon configuration here is very wide open, moreso thatn the SwiftOnSecurity alpha config.
+	- The Sysmon configuration here is very wide open, moreso than the SwiftOnSecurity alpha config.
 		- Do you want to make a wide-open anything-goes config?  Do you want even more restrictions?
 		- Do you *need* specific logs, i.e. Application, certain Zeek logs, etc?
 
