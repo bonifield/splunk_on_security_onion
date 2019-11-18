@@ -56,9 +56,11 @@
 - Install Security Onion, DO NOT ENABLE ELK WHEN PROMPTED DURING THE THIRD SETUP PHASE
   - Make sure your storage capabilities are pretty solid, or just turn off full PCAP if it's not important to you
 - Install Splunk
+- Configure Splunk to start on boot (Ubuntu/systemd, other systems read [here](https://docs.splunk.com/Documentation/Splunk/8.0.0/Admin/ConfigureSplunktostartatboottime)
 ```
 sudo dpkg -i [yoursplunkfile].deb
 sudo /opt/splunk/bin/splunk start
+sudo /opt/splunk/bin/splunk enable boot-start -systemd-managed 1
 ```
 - Log into the Splunk GUI, and configure the server to use HTTPS
 ```
@@ -138,11 +140,11 @@ sudo /opt/splunk/bin/splunk restart
 - Clean old data in an index, and re-index all local files in any monitored folders
 	- Typically if Zeek logs need to be purged because you forgot to convert output to JSON
 ```
-sudo splunk stop
-sudo splunk list index
-sudo splunk clean eventdata -index _thefishbucket
-sudo splunk clean eventdata -index [index]
-sudo splunk start
+sudo ./splunk stop
+sudo ./splunk list index
+sudo ./splunk clean eventdata -index _thefishbucket
+sudo ./splunk clean eventdata -index [index]
+sudo ./splunk start
 ```
 - Force Splunk to recognize new changes to props.conf and/or transforms.conf
 	- Try these things IN THIS ORDER
