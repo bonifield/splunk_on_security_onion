@@ -39,6 +39,7 @@
 ### If using Ubuntu and not Security Onion, this requires that Zeek (Bro) produce logs in JSON format, and the monitor paths be changed as necessary in the server's inputs.conf file.  Otherwise, all configurations should work exactly the same.
 
 ### TODO
+- the Nmap basic parser doesn't purge the version from the previous line that had one if the current one does not (must fix!)
 - Field modifications:  CEF compliance, better extractions (index-time and search-time), MORE extractions/fixes as needed (there are definitely some I missed)
 - Create scripts and/or GPOs to install the forwarders across a network
 - Actually utilize Splunk's ability to create new (non-default) certificates when deploying to hosts
