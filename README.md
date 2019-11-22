@@ -56,7 +56,7 @@
 - Install Security Onion, DO NOT ENABLE ELK WHEN PROMPTED DURING THE THIRD SETUP PHASE
   - Make sure your storage capabilities are pretty solid, or just turn off full PCAP if it's not important to you
 - Install Splunk
-- Configure Splunk to start on boot (Ubuntu/systemd, other systems read [here](https://docs.splunk.com/Documentation/Splunk/8.0.0/Admin/ConfigureSplunktostartatboottime)
+- Configure Splunk to start on boot (Ubuntu/systemd, other systems read [here](https://docs.splunk.com/Documentation/Splunk/8.0.0/Admin/ConfigureSplunktostartatboottime))
 ```
 sudo dpkg -i [yoursplunkfile].deb
 sudo /opt/splunk/bin/splunk start
