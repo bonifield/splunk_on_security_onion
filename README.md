@@ -14,6 +14,8 @@
 - A pet project
 - A work in progress
 
+### Updates
+- 11 Jan 2020:  added several new Sysmon extractions, added Affected_* fields for Security event logs, minor additions for PowerShell and System logs
 
 ### What This IS NOT:
 - A perfect solution
@@ -155,5 +157,6 @@ sudo /opt/splunk/bin/splunk restart
 
 - Image = official term for a compiled binary file
 - Subject_* = the one performing the action in question; the account requesting a logon (service, user, etc) but NOT the actual account logging on
+- Affected_* = rollup of account names and security IDs that would be otherwise affected by the subject account (targets, new logons, etc).  Examples of affected accounts would be the actual user being logged on by SYSTEM (the subject), or a user account having a password reset.
 - Target_* and User_* = the one being acted upon by the Subject
 - New_Logon_* = the account for whom the new logon was created, i.e. the account logged on
