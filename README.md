@@ -125,7 +125,7 @@ msiexec.exe /i [yoursplunkforwarder].msi RECEIVING_INDEXER="INDEXER_IP_ADDRESS:9
 - Configure the Forwarder to start automatically on boot, then start (or restart) the Forwarder
 ```
 sc config SplunkForwarder start=auto
-"C:\Program Files\SplunkUniversalForwarder\bin>splunk.exe" start
+"C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe" start
 ```
 - Verify Splunk is both receiving logs from Windows endpoints, and indexing local Zeek (Bro) logs
 ```
