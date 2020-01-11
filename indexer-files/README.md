@@ -20,8 +20,39 @@
 ### notes about field meanings
 - Image = official term for a compiled binary file
 - Subject_* = the one performing the action in question; the account requesting a logon (service, user, etc) but NOT the actual account logging on
+- Affected_* = combined evaluation field for Target_* , User_* , and other
 - Target_* and User_* = the one being acted upon by the Subject
 - New_Logon_* = the account for whom the new logon was created, i.e. the account logged on
+
+### Sysmon
+- ParentImageName
+	- image (binary) name, no path
+- ParentImageNameExt
+	- image extension
+- ParentImagePath
+	- image path minus the image name itself
+- ParentImagePathUnd
+	- image path minus the image name itself, but with underscores instead of backslashes
+- ParentImageLen
+	- length of the full path
+- ParentCommandLineLen
+	- length of the command executed
+- ParentCommandLineShort
+	- length of the command executed, truncated at 75 characters for better viewing in charts
+- ImageName
+	- image (binary) name, no path
+- ImageNameExt
+	- image extension
+- ImagePath
+	- image path minus the image name itself
+- ImagePathUnd
+	- image path minus the image name itself, but with underscores instead of backslashes
+- ImageLen
+	- length of the full path
+- CommandLineLen
+	- length of the command executed
+- CommandLineShort
+	- length of the command executed, truncated at 75 characters for better viewing in charts
 
 ### Windows Event Logs - Security
 - Message_Title
@@ -35,6 +66,8 @@
 	- hex value
 - Subject_Account_Logon_ID_Number
 	- int value
+- Affected_Account_Name
+- Affected_Security_ID
 - Target_Security_ID
 - Target_Account_Name
 - Target_Account_Domain
@@ -66,5 +99,7 @@
 - Locked_Account_Name
 
 ### Windows Event Logs - PowerShell
+- Command_Error
+- Process_ID
 - ScriptBlock
 - ScriptBlockID
