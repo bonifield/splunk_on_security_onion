@@ -25,6 +25,7 @@
 - New_Logon_* = the account for whom the new logon was created, i.e. the account logged on
 
 ### Sysmon
+#### note although there are several fields listed in this section, there are really only mixes of plain, "Und" (underscores replace backslashes), "Short" (75 character truncations), and "Clean" (underscores replace backslashes and no double-quotes) for the various fields, depending on analyst needs, and for the sake of quick-and-dirty dashboard drilldowns (both backslashes and double-quotes *will* make the developer's life miserable making workarounds)
 - ParentImageName
 	- image (binary) name, no path
 - ParentImageNameExt
