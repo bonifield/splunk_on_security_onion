@@ -38,7 +38,15 @@
 - ParentCommandLineLen
 	- length of the command executed
 - ParentCommandLineShort
-	- length of the command executed, truncated at 75 characters for better viewing in charts
+	- parent command executed, truncated at 75 characters
+- ParentCommandLineUnd
+	- parent command executed, but with underscores instead of backslashes
+- ParentCommandLineShortUnd
+	- parent command executed, truncated at 75 characters, but with underscores instead of backslashes
+- ParentCommandLineClean
+	- parent command executed, but with underscores instead of backslashes, and no double-quotes
+- ParentCommandLineShortClean
+	- parent command executed, truncated at 75 characters, but with underscores instead of backslashes, and no double-quotes
 - ImageName
 	- image (binary) name, no path
 - ImageNameExt
@@ -52,7 +60,21 @@
 - CommandLineLen
 	- length of the command executed
 - CommandLineShort
-	- length of the command executed, truncated at 75 characters for better viewing in charts
+	- command executed, truncated at 75 characters
+- CommandLineUnd
+	- command executed, but with underscores instead of backslashes
+- CommandLineShortUnd
+	- command executed, truncated at 75 characters, but with underscores instead of backslashes
+- CommandLineClean
+	- command executed, but with underscores instead of backslashes, and no double-quotes
+- CommandLineShortClean
+	- command executed, truncated at 75 characters, but with underscores instead of backslashes, and no double-quotes
+- UserDomain
+	- derived from splitting the User field (ex. domain\user) into two pieces
+- UserName
+	- derived from splitting the User field (ex. domain\user) into two pieces
+- UserUnd
+	- same as the User field, but with an underscore instead of a backslash
 
 ### Windows Event Logs - Security
 - Message_Title
