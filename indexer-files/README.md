@@ -76,6 +76,16 @@
 	- derived from splitting the User field (ex. domain\user) into two pieces
 - UserUnd
 	- same as the User field, but with an underscore instead of a backslash
+- ImageLoadedLen
+	- length of the full path
+- ImageLoadedName
+	- image loaded (binary) name, no path
+- ImageLoadedExt
+	- image loaded extension
+- ImageLoadedPath
+	- image loaded path minus the image name itself
+- ImageLoadedPathUnd
+	- image loaded path minus the image name itself, but with underscores instead of backslashes
 
 ### Windows Event Logs - Security
 - Message_Title
