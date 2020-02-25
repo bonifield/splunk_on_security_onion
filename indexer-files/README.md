@@ -14,6 +14,9 @@
 	- a [lookup table](https://docs.splunk.com/Documentation/Splunk/7.3.1/Knowledge/DefineanautomaticlookupinSplunkWeb) for Zeek's conn_state field
 - EventCode_table.csv
 	- a lookup table for Sysmon event codes
+- http_status.csv
+	- lookup for HTTP codes
+	- from [Splunk documentation](https://wiki.splunk.com/Http_status.csv)
 
 ## custom field extractions
 
