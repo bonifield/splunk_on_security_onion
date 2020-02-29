@@ -1,4 +1,8 @@
 # Splunk on Security Onion
+- A work in progress
+
+### Updates
+- 11 Jan 2020:  added several new Sysmon extractions, added Affected_* fields for Security event logs, minor additions for PowerShell and System logs
 
 ### Objectives:
 - Manage logs with Splunk, versus the ELK stack built into Security Onion
@@ -12,10 +16,6 @@
 	- A series of instructions that work across Debian-based Linux builds (Debian, Ubuntu, Security Onion, etc)
 - A fully functional project (note points below as to what is not yet included)
 - A pet project
-- A work in progress
-
-### Updates
-- 11 Jan 2020:  added several new Sysmon extractions, added Affected_* fields for Security event logs, minor additions for PowerShell and System logs
 
 ### What This IS NOT:
 - A perfect solution
