@@ -8,12 +8,12 @@
 
 ### Objectives:
 - Manage logs with Splunk, versus the ELK stack built into Security Onion
-- Ingest Windows Application, Security, System, and Sysmon logs via forwarding from remote hosts into Splunk on Security Onion
+- Ingest Windows Application, Security, System, Sysmon, and Splunk monitoring logs via forwarding from remote hosts into Splunk on Security Onion
 - Centrally monitor home or small office networks, especially for the purposes of home lab penetration testing and post-analysis
 - Provide all necessary configuration files, and all necessary commands in a streamlined set of instructions
 
 ### What This IS:
-- A manual, but streamlined, method of installing and configuring Splunk on a standalone instance of Security Onion to receive Zeek, Sysmon, and Windows Event logs (Application, Security, System)
+- A manual, but streamlined, method of installing and configuring Splunk on a standalone instance of Security Onion to receive Zeek, Sysmon, and Windows Event logs (Application, Security, System), and select logs from the Splunk monitoring binaries
 	- A series of very clear configuration files, and instructions on where to put them
 	- A series of instructions that work across Debian-based Linux builds (Debian, Ubuntu, Security Onion, etc)
 - A fully functional project (note points below as to what is not yet included)
@@ -39,7 +39,7 @@
 - Log data relevance
 	- The Sysmon configuration here is very wide open, moreso than the SwiftOnSecurity alpha config.
 		- Do you want to make a wide-open anything-goes config?  Do you want even more restrictions?
-		- Do you *need* specific logs, i.e. Application, certain Zeek logs, etc?
+		- Do you *need* specific logs, i.e. Application, certain Zeek logs, WinNetMon, etc?
 
 ### If using Ubuntu and not Security Onion, this requires that Zeek (Bro) produce logs in JSON format, and the monitor paths be changed as necessary in the server's inputs.conf file.  Otherwise, all configurations should work exactly the same.
 
