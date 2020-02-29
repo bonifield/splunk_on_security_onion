@@ -1,17 +1,19 @@
 <!--
 	This configuration stands on the shoulders of giants, aka the mountain of work by SwiftOnSecurity (link below).
 	JB MODS
-	Last Updated:  2019-09-25
-	- added Splunk executables ("Images") to the list of exclude statements for Event ID 1
-	- commented out conhost.exe in Event ID 1 exclusions
-	(REMOVED)- added FTP ports 20 and 21 to the include statements in Event ID 3
-	- commented out csrss.exe, services.exe, and winlogon.exe in Event ID 8 exclusions (will test)
-	- enabled all logging for Event ID 9
-	- added lsass.exe and winlogon.exe to the include statements in Event ID 10
-	- added .js, .sh, and .py to the include statements in Event ID 11
-	- added .js, .sh, and .py to the include statements in Event ID 15
-	- enabled all logging for Event IDs 17 and 18
-	- enabled ALL networking events (this will generate a LOT of logs - be ready)
+	Last Updated:  2020-02-29
+		- removed Splunk monitoring binaries (they can account for over 40% of all Sysmon logs generated in some otherwise-static environments)
+	2019-09-25
+		- added Splunk executables ("Images") to the list of exclude statements for Event ID 1
+		- commented out conhost.exe in Event ID 1 exclusions
+		(REMOVED)- added FTP ports 20 and 21 to the include statements in Event ID 3
+		- commented out csrss.exe, services.exe, and winlogon.exe in Event ID 8 exclusions (will test)
+		- enabled all logging for Event ID 9
+		- added lsass.exe and winlogon.exe to the include statements in Event ID 10
+		- added .js, .sh, and .py to the include statements in Event ID 11
+		- added .js, .sh, and .py to the include statements in Event ID 15
+		- enabled all logging for Event IDs 17 and 18
+		- enabled ALL networking events (this will generate a LOT of logs - be ready)
 
 -->
 
@@ -99,6 +101,27 @@
 		<!--DATA: UtcTime, ProcessGuid, ProcessID, Image, FileVersion, Description, Product, Company, CommandLine, CurrentDirectory, User, LogonGuid, LogonId, TerminalSessionId, IntegrityLevel, Hashes, ParentProcessGuid, ParentProcessId, ParentImage, ParentCommandLine, RuleName-->
 	<RuleGroup name="" groupRelation="or">
 		<ProcessCreate onmatch="exclude">
+			<!--SECTION: Splunk Forwarders-->
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk-powershell.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk-winprintmon.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk-regmon.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk-netmon.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk-admon.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk-MonitorNoHandle.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk-winevtlog.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunkd.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\splunk.exe</Image>
+			<Image condition="is">C:\Program Files\Splunk\bin\btool.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-powershell.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winprintmon.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-regmon.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-netmon.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-admon.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-MonitorNoHandle.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winevtlog.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\btool.exe</Image>
 			<!--SECTION: Microsoft Windows-->
 			<ParentCommandLine condition="is">"C:\Program Files\Microsoft Monitoring Agent\Agent\MonitoringHost.exe" -Embedding</ParentCommandLine>
 			<CommandLine condition="begin with"> "C:\Windows\system32\wermgr.exe" "-queuereporting_svc" </CommandLine> <!--Windows:Windows error reporting/telemetry-->
@@ -214,6 +237,7 @@
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx -p -s AppXSvc</CommandLine> <!--Windows:Apps: AppX Deployment Service-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx -s ClipSVC</CommandLine> <!--Windows:Apps: Client License Service-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx</CommandLine> <!--Windows:Apps [ https://www.howtogeek.com/320261/what-is-wsappx-and-why-is-it-running-on-my-pc/ ] -->
+			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s wlidsvc</CommandLine> <!--Windows:Apps: Account Sign-In Assistant-->
 			<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs</ParentCommandLine> <!--Windows: Network services: Spawns Consent.exe-->
 			<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k localSystemNetworkRestricted</ParentCommandLine> <!--Windows-->
 			<CommandLine condition="is">C:\Windows\system32\deviceenroller.exe /c /AutoEnrollMDM</CommandLine> <!--Windows: AzureAD device enrollment agent-->
