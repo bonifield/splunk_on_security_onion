@@ -62,7 +62,9 @@
 ```
 sudo dpkg -i [yoursplunkfile].deb
 sudo /opt/splunk/bin/splunk start
+sudo /opt/splunk/bin/splunk stop
 sudo /opt/splunk/bin/splunk enable boot-start -systemd-managed 1
+sudo /opt/splunk/bin/splunk start
 ```
 - Log into the Splunk GUI, and configure the server to use HTTPS
 ```
@@ -74,6 +76,7 @@ Settings --> Server Settings --> General Settings --> Enable SSL (HTTPS) in Splu
 Settings --> Indexes --> New Index --> Index Name:  bro --> Save
                          New Index --> Index Name:  sysmon --> Save
                          New Index --> Index Name:  winevt --> Save
+                         New Index --> Index Name:  splunkmon --> Save
 ```
 - Make the new indexes viewable on the homepage Data Summary and for any user account deemed necessary
 ```
@@ -105,8 +108,8 @@ sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
 - Install Sysmon
 	- or better yet, use a GPO
 ```
-sysmon64.exe -i -n -accepteula
-sysmon64.exe -c sysmon-config-sosalpha-JB-MODS.xml
+sysmon.exe -i -n -accepteula
+sysmon.exe -c sysmon-config-sosalpha-JB-MODS.xml
 OR over the network
 \\ServerName\sysmon -i -n -accepteula
 sysmon -c sysmon-config-sosalpha-JB-MODS.xml
