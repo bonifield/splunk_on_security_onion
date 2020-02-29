@@ -75,26 +75,52 @@
 	- command executed, truncated at 75 characters, but with underscores instead of backslashes, and no double-quotes
 - UserDomain
 	- derived from splitting the User field (ex. domain\user) into two pieces
+- UserDomainLen
+	- length of UserDomain
 - UserName
 	- derived from splitting the User field (ex. domain\user) into two pieces
+- UserNameLen
+	- length of UserName
+- UserLen
+	- length of User (the field as created by Sysmon, ex. domain\user)
 - UserUnd
 	- same as the User field, but with an underscore instead of a backslash
 - ImageLoadedLen
 	- length of the full path
 - ImageLoadedName
 	- image loaded (binary) name, no path
-- ImageLoadedExt
+- ImageLoadedNameExt (formerly ImageLoadedExt)
 	- image loaded extension
 - ImageLoadedPath
 	- image loaded path minus the image name itself
 - ImageLoadedPathUnd
 	- image loaded path minus the image name itself, but with underscores instead of backslashes
+- SourceImagePath
+- SourceImageName
+- SourceImageNameExt
+- TargetImagePath
+- TargetImageName
+- TargetImageNameExt
+- TargetObjectExpanded
+	- expanded from the short Sysmon name to the full Windows registry path
+- TargetObjectRootKey
+	- just the root key from the registry value
+- TargetObjectRootKeyExpanded
+	- just the root key from the registry value, expanded from the short Sysmon name to the full Windows registry path
+- TargetFilenamePath
+- TargetFilenameName
+- TargetFilenameNameExt
 
 ### Windows Event Logs - Security
 - Message_Title
 	- the first summarizing sentence in the log describing the event
 - Process_ID_Number
 	- int value
+- ProcessPath
+- ProcessPathUnd
+- ProcessName
+- ProcessNameExt
+- Process_NameLen
 - Subject_Security_ID
 - Subject_Account_Name
 - Subject_Account_Domain
