@@ -1,0 +1,13 @@
+logontype,logontypename,logontypedescription
+0,"system","used only by SYSTEM account authentication"
+2,"interactive","logon at keyboard and screen of system"
+3,"network","connection from across the network"
+4,"batch","scheduled task or similar"
+5,"service","service startup"
+7,"unlock","unlocked from locked state"
+8,"networkcleartext","credentials sent in clear text"
+9,"newcredentials","RunAs or mapping alternative credentials, see event 4648"
+10,"remoteinteractive","Terminal Services, Remote Desktop, or Remote Assistance"
+11,"cachedinteractive","logon with cached domain credentials"
+12,"cachedremoteinteractive","same as remoteinteractive, used for auditing"
+13,"cachedunlocklogon","same as unlock, unlocked from locked state"

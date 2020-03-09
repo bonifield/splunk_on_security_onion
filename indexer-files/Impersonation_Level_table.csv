@@ -1,0 +1,7 @@
+impersonationlevel,impersonationleveldescription
+"-","other or logging error, see event for further details"
+"Anonymous","this COM impersonation level hides the identity of the caller; calls to WMI may fail"
+"Default","default COM impersonation level"
+"Delegation","this COM impersonation level allows objects to permit other objects to use credentials of the caller; may constitute unnecessary security risk; only supported under Windows 2000"
+"Identification","this COM impersonation level allows objects to query the credentials of the caller; calls to WMI may fail"
+"Impersonation","this COM impersonation level allows objects to use the credentials of the caller; RECOMMENDED impersonation level for WMI calls"
