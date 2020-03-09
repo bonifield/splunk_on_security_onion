@@ -18,7 +18,7 @@
 	- lookup for HTTP codes
 	- from [Splunk documentation](https://wiki.splunk.com/Http_status.csv)
 
-## custom field extractions
+## CUSTOM FIELD EXTRACTIONS (in addition to those parsed from the raw event)
 
 ### notes about field meanings
 - Image = official term for a compiled binary file
@@ -29,6 +29,8 @@
 
 ### Sysmon
 #### note although there are several fields listed in this section, there are really only mixes of plain, "Und" (underscores replace backslashes), "Short" (75 character truncations), and "Clean" (underscores replace backslashes and no double-quotes) for the various fields, depending on analyst needs, and for the sake of quick-and-dirty dashboard drilldowns (both backslashes and double-quotes *will* make the developer's life miserable making workarounds)
+- ParentImageUnd
+	- parent image field but with underscores instead of backslashes
 - ParentImageName
 	- image (binary) name, no path
 - ParentImageNameExt
@@ -51,6 +53,8 @@
 	- parent command executed, but with underscores instead of backslashes, and no double-quotes
 - ParentCommandLineShortClean
 	- parent command executed, truncated at 75 characters, but with underscores instead of backslashes, and no double-quotes
+- ImageUnd
+	- image field but with underscores instead of backslashes
 - ImageName
 	- image (binary) name, no path
 - ImageNameExt
@@ -159,6 +163,23 @@
 - Group_Domain
 - Locked_Security_ID
 - Locked_Account_Name
+- Creator_Process_Path
+- Creator_Process_Image_Name
+- Creator_Process_Image_Name_Ext
+- Creator_Process_NameLen
+- Creator_Process_PathUnd
+- New_Process_Path
+- New_Process_Image_Name
+- New_Process_Image_Name_Ext
+- New_Process_NameLen
+- New_Process_PathUnd
+- Process_Command_LineLen
+- Process_Command_LineShort
+- Process_Command_LineUnd
+- Process_Command_LineShortUnd
+- Process_Command_LineClean
+- Process_Command_LineShortClean
+- 
 
 ### Windows Event Logs - PowerShell
 - Command_Error
