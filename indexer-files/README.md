@@ -179,7 +179,6 @@
 - Process_Command_LineShortUnd
 - Process_Command_LineClean
 - Process_Command_LineShortClean
-- 
 
 ### Windows Event Logs - PowerShell
 - Command_Error
