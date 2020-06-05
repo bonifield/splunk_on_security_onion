@@ -1,7 +1,10 @@
 <!--
 	This configuration stands on the shoulders of giants, aka the mountain of work by SwiftOnSecurity (link below).
 	JB MODS
-	Last Updated:  2020-02-29
+	Last Updated:  2020-06-05
+		- fixed Splunk binaries in Event ID 1
+		- added some updates from the main SwiftOnSecurity config
+	2020-02-29
 		- removed Splunk monitoring binaries (they can account for over 40% of all Sysmon logs generated in some otherwise-static environments)
 	2019-08-31
 		- added Splunk executables ("Images") to the list of exclude statements for Event ID 1
@@ -100,7 +103,8 @@
 		<!--DATA: UtcTime, ProcessGuid, ProcessID, Image, FileVersion, Description, Product, Company, CommandLine, CurrentDirectory, User, LogonGuid, LogonId, TerminalSessionId, IntegrityLevel, Hashes, ParentProcessGuid, ParentProcessId, ParentImage, ParentCommandLine, RuleName-->
 	<RuleGroup name="" groupRelation="or">
 		<ProcessCreate onmatch="exclude">
-			<!--SECTION: Splunk Forwarders-->
+			<!--SECTION: Splunk -->
+			<ParentImage condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</ParentImage> <!-- Splunk searching, indexing, forwarding, web interfaces services, constantly runs [ https://docs.splunk.com/Documentation/Splunk/7.3.1/Installation/Splunksarchitectureandwhatgetsinstalled ] -->
 			<Image condition="is">C:\Program Files\Splunk\bin\splunk-powershell.exe</Image>
 			<Image condition="is">C:\Program Files\Splunk\bin\splunk-winprintmon.exe</Image>
 			<Image condition="is">C:\Program Files\Splunk\bin\splunk-regmon.exe</Image>
@@ -111,18 +115,21 @@
 			<Image condition="is">C:\Program Files\Splunk\bin\splunkd.exe</Image>
 			<Image condition="is">C:\Program Files\Splunk\bin\splunk.exe</Image>
 			<Image condition="is">C:\Program Files\Splunk\bin\btool.exe</Image>
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-powershell.exe</Image>
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winprintmon.exe</Image>
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-regmon.exe</Image>
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-netmon.exe</Image>
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-admon.exe</Image>
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-MonitorNoHandle.exe</Image>
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winevtlog.exe</Image>
 			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</Image>
 			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe</Image>
 			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\btool.exe</Image>
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-btool.exe</Image> <!-- Splunk config troubleshooting -->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-openssl.exe</Image> <!-- Splunk OpenSSL -->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-MonitorNoHandle.exe</Image> <!-- Splunk Windows monitor, starts and stops frequently -->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-admon.exe</Image> <!-- Splunk Active Directory monitor, starts and stops frequently, sidenote - EATS SYSTEM RESOURCES-->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-netmon.exe</Image> <!-- Splunk network monitor, starts and stops frequently-->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-perfmon.exe</Image> <!-- Splunk performance monitor, starts and stops frequently-->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-powershell.exe</Image> <!-- Splunk PowerShell log monitor, starts and stops frequently -->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-regmon.exe</Image> <!-- Splunk registry monitor, starts and stops frequently-->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winevtlog.exe</Image> <!-- Splunk Windows event monitor, starts and stops frequently -->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winprintmon.exe</Image> <!-- Splunk print job monitor -->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-wmi.exe</Image> <!-- Splunk WMI monitor, starts and stops frequently-->
 			<!--SECTION: Microsoft Windows-->
-			<ParentCommandLine condition="is">"C:\Program Files\Microsoft Monitoring Agent\Agent\MonitoringHost.exe" -Embedding</ParentCommandLine>
 			<CommandLine condition="begin with"> "C:\Windows\system32\wermgr.exe" "-queuereporting_svc" </CommandLine> <!--Windows:Windows error reporting/telemetry-->
 			<CommandLine condition="begin with">C:\Windows\system32\DllHost.exe /Processid</CommandLine> <!--Windows-->
 			<CommandLine condition="begin with">C:\Windows\system32\wbem\wmiprvse.exe -Embedding</CommandLine> <!--Windows: WMI provider host-->
@@ -141,7 +148,7 @@
 			<Image condition="is">C:\Windows\system32\PrintIsolationHost.exe</Image> <!--Windows: Printing-->
 			<Image condition="is">C:\Windows\system32\SppExtComObj.Exe</Image> <!--Windows: KMS activation-->
 			<Image condition="is">C:\Windows\system32\audiodg.exe</Image> <!--Windows: Launched constantly-->
-			<!--<Image condition="is">C:\Windows\system32\conhost.exe</Image>--> <!--Windows: Command line interface host process-->
+			<Image condition="is">C:\Windows\system32\conhost.exe</Image> <!--Windows: Command line interface host process-->
 			<Image condition="is">C:\Windows\system32\mobsync.exe</Image> <!--Windows: Network file syncing-->
 			<Image condition="is">C:\Windows\system32\musNotification.exe</Image> <!--Windows: Update pop-ups-->
 			<Image condition="is">C:\Windows\system32\musNotificationUx.exe</Image> <!--Windows: Update pop-ups-->
@@ -150,14 +157,11 @@
 			<Image condition="is">C:\Windows\system32\sppsvc.exe</Image> <!--Windows: Software Protection Service-->
 			<Image condition="is">C:\Windows\system32\wbem\WmiApSrv.exe</Image> <!--Windows: WMI performance adapter host process-->
 			<IntegrityLevel condition="is">AppContainer</IntegrityLevel> <!--Windows: Don't care about sandboxed processes right now. Will need to revisit this decision.-->
-			<!--<ParentCommandLine condition="begin with">%%SystemRoot%%\system32\csrss.exe ObjectDirectory=\Windows</ParentCommandLine>--> <!--Windows:CommandShell: Triggered when programs use the command shell, but doesn't provide attribution for what caused it-->
+			<ParentCommandLine condition="begin with">%%SystemRoot%%\system32\csrss.exe ObjectDirectory=\Windows</ParentCommandLine> <!--Windows:CommandShell: Triggered when programs use the command shell, but doesn't provide attribution for what caused it-->
 			<ParentCommandLine condition="is">C:\windows\system32\wermgr.exe -queuereporting</ParentCommandLine> <!--Windows:Windows error reporting/telemetry-->
 			<CommandLine condition="is">C:\WINDOWS\system32\devicecensus.exe UserCxt</CommandLine>
 			<CommandLine condition="is">C:\Windows\System32\usocoreworker.exe -Embedding</CommandLine>
 			<ParentImage condition="is">C:\Windows\system32\SearchIndexer.exe</ParentImage> <!--Windows:Search: Launches many uninteresting sub-processes-->
-			<!--SECTION: Windows:Defender-->
-			<Image condition="begin with">C:\Program Files\Windows Defender</Image> <!--Windows:Defender in Win10-->
-			<Image condition="is">C:\Windows\system32\MpSigStub.exe</Image> <!--Windows: Microsoft Malware Protection Signature Update Stub-->
 			<!--SECTION: Windows:svchost-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k appmodel -s StateRepository</CommandLine>
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k appmodel -p -s camsvc</CommandLine>
@@ -202,6 +206,7 @@
 			<CommandLine condition="is">C:\Windows\System32\svchost.exe -k localSystemNetworkRestricted -p -s WdiSystemHost</CommandLine> <!--Windows: Diagnostic System Host [ http://www.blackviper.com/windows-services/diagnostic-system-host/ ] -->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k localSystemNetworkRestricted</CommandLine> <!--Windows-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -p -s wlidsvc</CommandLine> <!--Windows: Windows Live Sign-In Assistant [ https://www.howtogeek.com/howto/30348/what-are-wlidsvc.exe-and-wlidsvcm.exe-and-why-are-they-running/ ] -->
+			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s wlidsvc</CommandLine> <!--Windows:Apps: Account Sign-In Assistant-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -p -s ncaSvc</CommandLine> <!--Windows: Network Connectivity Assistant [ http://www.blackviper.com/windows-services/network-connectivity-assistant/ ] -->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s BDESVC</CommandLine> <!--Windows:Network: BitLocker Drive Encryption-->
 			<CommandLine condition="is">C:\Windows\System32\svchost.exe -k netsvcs -p -s BDESVC</CommandLine> <!--Microsoft:Win10:1903:Network: BitLocker Drive Encryption-->
@@ -236,7 +241,6 @@
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx -p -s AppXSvc</CommandLine> <!--Windows:Apps: AppX Deployment Service-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx -s ClipSVC</CommandLine> <!--Windows:Apps: Client License Service-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k wsappx</CommandLine> <!--Windows:Apps [ https://www.howtogeek.com/320261/what-is-wsappx-and-why-is-it-running-on-my-pc/ ] -->
-			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s wlidsvc</CommandLine> <!--Windows:Apps: Account Sign-In Assistant-->
 			<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs</ParentCommandLine> <!--Windows: Network services: Spawns Consent.exe-->
 			<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k localSystemNetworkRestricted</ParentCommandLine> <!--Windows-->
 			<CommandLine condition="is">C:\Windows\system32\deviceenroller.exe /c /AutoEnrollMDM</CommandLine> <!--Windows: AzureAD device enrollment agent-->
@@ -256,7 +260,6 @@
 			<!--SECTION: Microsoft:Office-->
 			<Image condition="is">C:\Program Files\Microsoft Office\Office16\MSOSYNC.EXE</Image> <!--Microsoft:Office: Background process for SharePoint/Office365 connectivity-->
 			<Image condition="is">C:\Program Files (x86)\Microsoft Office\Office16\MSOSYNC.EXE</Image> <!--Microsoft:Office: Background process for SharePoint/Office365 connectivity-->
-			<Image condition="is">C:\Program Files\Microsoft Office\Office15\MSOSYNC.EXE</Image> <!--Microsoft:Office: Background process for SharePoint/Office365 connectivity-->
 			<Image condition="is">C:\Program Files\Common Files\Microsoft Shared\OfficeSoftwareProtectionPlatform\OSPPSVC.EXE</Image> <!--Microsoft:Office: Licensing service-->
 			<Image condition="is">C:\Program Files\Microsoft Office\Office16\msoia.exe</Image> <!--Microsoft:Office: Telemetry collector-->
 			<Image condition="is">C:\Program Files (x86)\Microsoft Office\root\Office16\officebackgroundtaskhandler.exe</Image>
@@ -269,31 +272,6 @@
 			<!--SECTION: Google-->
 			<CommandLine condition="begin with">"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --type=</CommandLine> <!--Google:Chrome: massive command-line arguments-->
 			<CommandLine condition="begin with">"C:\Program Files\Google\Chrome\Application\chrome.exe" --type=</CommandLine> <!--Google:Chrome: massive command-line arguments-->
-			<!--SECTION: Firefox-->
-			<CommandLine condition="begin with">"C:\Program Files\Mozilla Firefox\plugin-container.exe" --channel</CommandLine> <!-- Mozilla:Firefox: Large command-line arguments | Credit @Darkbat91 -->
-			<CommandLine condition="begin with">"C:\Program Files (x86)\Mozilla Firefox\plugin-container.exe" --channel</CommandLine> <!-- Mozilla:Firefox: Large command-line arguments | Credit @Darkbat91 -->
-			<!--SECTION: Adobe:Flash-->
-			<Image condition="is">C:\Windows\SysWOW64\Macromed\Flash\FlashPlayerUpdateService.exe</Image> <!--Adobe:Flash: Properly hardened updater, not a risk-->
-			<!--SECTION: Cisco-->
-			<ParentImage condition="is">C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpnagent.exe</ParentImage> <!--Cisco: Calls netsh to change settings on connect-->
-			<!--SECTION: Drivers-->
-				<!--COMMENT: Attackers sometimes hide themselves in the folders of drivers, be careful to only exclude what is clogging events-->
-			<CommandLine condition="is">C:\Windows\system32\igfxsrvc.exe -Embedding</CommandLine>
-			<ParentImage condition="is">C:\Program Files\Realtek\Audio\HDA\RtkAudioService64.exe</ParentImage> <!--Realtek:Driver: routine actions-->
-			<!--SECTION: Splunk-->
-				<!--COMMENT: splunk.exe starts, stops, and restarts the application, so we will opt to monitor that -->
-			<ParentImage condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</ParentImage> <!-- Splunk searching, indexing, forwarding, web interfaces services, constantly runs [ https://docs.splunk.com/Documentation/Splunk/7.3.1/Installation/Splunksarchitectureandwhatgetsinstalled ] -->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-btool.exe</Image> <!-- Splunk config troubleshooting -->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-openssl.exe</Image> <!-- Splunk OpenSSL -->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-MonitorNoHandle.exe</Image> <!-- Splunk Windows monitor, starts and stops frequently -->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-admon.exe</Image> <!-- Splunk Active Directory monitor, starts and stops frequently, sidenote - EATS SYSTEM RESOURCES-->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-netmon.exe</Image> <!-- Splunk network monitor, starts and stops frequently-->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-perfmon.exe</Image> <!-- Splunk performance monitor, starts and stops frequently-->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-powershell.exe</Image> <!-- Splunk PowerShell log monitor, starts and stops frequently -->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-regmon.exe</Image> <!-- Splunk registry monitor, starts and stops frequently-->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winevtlog.exe</Image> <!-- Splunk Windows event monitor, starts and stops frequently -->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winprintmon.exe</Image> <!-- Splunk print job monitor -->
-			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-wmi.exe</Image> <!-- Splunk WMI monitor, starts and stops frequently-->
 		</ProcessCreate>
 	</RuleGroup>
 	
