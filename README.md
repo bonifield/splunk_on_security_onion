@@ -111,12 +111,11 @@ sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
 	- This configuration is a derivative of the alpha config developed by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config) and has been tuned for way more logging
 - Install Sysmon
 	- or better yet, use a GPO
+	- NOTE - in May 2020, the "-n" flag was deprecated; network logging can only be enabled via configuration ([source](https://twitter.com/CipherMonger/status/1257367319434715138))
 ```
-sysmon.exe -i -n -accepteula
-sysmon.exe -c sysmon-config-sosalpha-JB-MODS.xml
+sysmon.exe -i sysmon-config-sosalpha-JB-MODS.xml -accepteula
 OR over the network
-\\ServerName\sysmon -i -n -accepteula
-sysmon -c sysmon-config-sosalpha-JB-MODS.xml
+\\SysVol\Or\ServerName\sysmon -i sysmon-config-sosalpha-JB-MODS.xml -accepteula
 ```
 - Place the Universal Forwarder on the host and install it silently
 	- Substitute INDEXER_IP_ADDRESS for your Splunk's network address
