@@ -142,6 +142,10 @@ sc config SplunkForwarder start=auto
 ```
 Splunk homepage --> Searching and Reporting --> Data Summary --> Sourcetypes
 ```
+- Note: some people have reported that you may need to restart the endpoint forwarder
+```
+"C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe" restart
+```
 
 ### Randoms
 - start/stop/restart Splunk
