@@ -148,7 +148,7 @@
 			<Image condition="is">C:\Windows\system32\PrintIsolationHost.exe</Image> <!--Windows: Printing-->
 			<Image condition="is">C:\Windows\system32\SppExtComObj.Exe</Image> <!--Windows: KMS activation-->
 			<Image condition="is">C:\Windows\system32\audiodg.exe</Image> <!--Windows: Launched constantly-->
-			<!--<Image condition="is">C:\Windows\system32\conhost.exe</Image> <!--Windows: Command line interface host process-->
+			<!--<Image condition="is">C:\Windows\system32\conhost.exe</Image>--> <!--Windows: Command line interface host process-->
 			<Image condition="is">C:\Windows\system32\mobsync.exe</Image> <!--Windows: Network file syncing-->
 			<Image condition="is">C:\Windows\system32\musNotification.exe</Image> <!--Windows: Update pop-ups-->
 			<Image condition="is">C:\Windows\system32\musNotificationUx.exe</Image> <!--Windows: Update pop-ups-->
@@ -864,12 +864,12 @@
 		<!--ADDITIONAL REFERENCE: [ https://blog.cobaltstrike.com/2015/10/07/named-pipe-pivoting/ ] -->
 
 		<!--DATA: UtcTime, ProcessGuid, ProcessId, PipeName, Image-->
-		<!--
-	<RuleGroup name="" groupRelation="or">
-		<PipeEvent onmatch="include">
+		
+	<!--<RuleGroup name="" groupRelation="or">-->
+		<!--<PipeEvent onmatch="include">-->
 			<!--NOTE: Using incide with no rules means nothing in this section will be logged-->
-		<!--</PipeEvent>
-	</RuleGroup>-->
+		<!--</PipeEvent>-->
+	<!--</RuleGroup>-->
 
 	<!--SYSMON EVENT ID 19 & 20 & 21 : WMI EVENT MONITORING [WmiEvent]-->
 		<!--EVENT 19: "WmiEventFilter activity detected"-->
