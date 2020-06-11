@@ -1,6 +1,9 @@
 # Splunk on Security Onion
 
 ### Updates
+- 11 May 2020
+	- updated the Sysmon config
+	- updated Sysmon install notes below (notably the removal of "-n")
 - 29 Feb 2020
 	- converted many evaluated fields to search-time extractions, added new fields, added new aliases, removed Splunk binaries from Sysmon (via config) and Security (via blacklists) logs, added winnetmon (Splunk binary) sourcetype to log all accepted inbound connections on a host
 - 11 Jan 2020
@@ -111,7 +114,7 @@ sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
 	- This configuration is a derivative of the alpha config developed by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config) and has been tuned for way more logging
 - Install Sysmon
 	- or better yet, use a GPO
-	- NOTE - in May 2020, the "-n" flag was deprecated; network logging can only be enabled via configuration ([source](https://twitter.com/CipherMonger/status/1257367319434715138))
+	- NOTE - in April 2020, the "-n" flag was deprecated; network logging can only be enabled via configuration ([source](https://twitter.com/CipherMonger/status/1257367319434715138))
 ```
 sysmon.exe -i sysmon-config-sosalpha-JB-MODS.xml -accepteula
 OR over the network
