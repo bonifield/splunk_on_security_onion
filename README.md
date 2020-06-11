@@ -95,8 +95,10 @@ Splunk --> Settings --> Forwarding and receiving --> Configure receiving --> + A
 ```
 - Configure UFW (firewall) to allow forwarded logs (from endpoints or Intermediate Forwarder, see below) to the Receiver
 ```
+sudo ufw allow 8089/tcp
 sudo ufw allow 9997/tcp
 OR
+sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 8089
 sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
 ```
 - Place inputs.conf (the indexer version) on the indexer (Splunk server)
