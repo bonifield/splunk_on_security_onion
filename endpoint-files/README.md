@@ -2,6 +2,8 @@
 - A work in progress
 
 ### Updates
+- 05 June 2020
+	- updated to the most recent version of [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)'s config
 - 29 Feb 2020
 	- added index:splunkmon/sourcetype:winnetmon to the inputs.conf file, to log all accepted inbound connections on the host
 	- disabled Splunk monitoring binaries because they are very noisy
@@ -17,8 +19,6 @@
 	- you should NOT have to configure this; just double check during the install process that it looks right
 - sysmon-config-sosalpha-JB-MODS.xml
 	- the Sysmon configuration, derived from [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)
-- sysmon-config-sosalpha-JB-MODS-allnetwork.xml
-	- same as above, but with *all* network connections enabled (this will generate a LOT of logs)
 
 ### Don't forget to make the service start automatically:
 ```
