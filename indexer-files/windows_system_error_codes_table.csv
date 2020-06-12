@@ -283,7 +283,7 @@
 "ERROR_IO_PRIVILEGE_FAILED",571,"0x23B","{Privilege Failed} The I/O permissions for the process could not be changed."
 "ERROR_CONTROL_C_EXIT",572,"0x23C","{Application Exit by CTRL+C} The application terminated as a result of a CTRL+C."
 "ERROR_MISSING_SYSTEMFILE",573,"0x23D","{Missing System File} The required system file %hs is bad or missing."
-"ERROR_UNHANDLED_EXCEPTION",574,"0x23E","{Application Error} The exception %s,"0x%08lx) occurred in the application at location 0x%08lx."
+"ERROR_UNHANDLED_EXCEPTION",574,"0x23E","{Application Error} The exception %s 0x%08lx) occurred in the application at location 0x%08lx."
 "ERROR_APP_INIT_FAILURE",575,"0x23F","{Application Error} The application was unable to start correctly,"0x%lx). Click OK to close the application."
 "ERROR_PAGEFILE_CREATE_FAILED",576,"0x240","{Unable to Create Paging File} The creation of the paging file %hs failed (%lx). The requested size was %ld."
 "ERROR_INVALID_IMAGE_HASH",577,"0x241","Windows cannot verify the digital signature for this file. A recent hardware or software change might have installed a file that is signed incorrectly or damaged, or that might be malicious software from an unknown source."
