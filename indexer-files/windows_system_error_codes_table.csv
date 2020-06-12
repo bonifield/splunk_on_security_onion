@@ -2137,7 +2137,7 @@ DNS_ERROR_INVALID_XML,9126,0x23A6,"This operation could not be completed because
 DNS_ERROR_NO_VALID_TRUST_ANCHORS,9127,0x23A7,"This operation completed but no trust anchors were added because all of the trust anchors received were either invalid unsupported expired or would not become valid in less than 30 days."
 DNS_ERROR_ROLLOVER_NOT_POKEABLE,9128,0x23A8,"The specified signing key is not waiting for parental DS update."
 DNS_ERROR_NSEC3_NAME_COLLISION,9129,0x23A9,"Hash collision detected during NSEC3 signing. Specify a different user-provided salt or use a randomly generated salt and attempt to sign the zone again."
-DNS_ERROR_NSEC_INCOMPATIBLE_WITH_NSEC3_RSA_SHA1,9130,0x23AA,"NSEC is not compatible with the NSEC3-RSA-SHA-1 algorithm. Choose a different algorithm or use NSEC3.""
+DNS_ERROR_NSEC_INCOMPATIBLE_WITH_NSEC3_RSA_SHA1,9130,0x23AA,"NSEC is not compatible with the NSEC3-RSA-SHA-1 algorithm. Choose a different algorithm or use NSEC3."
 DNS_INFO_NO_RECORDS,9501,0x251D,"No records found for given DNS query."
 DNS_ERROR_BAD_PACKET,9502,0x251E,"Bad DNS packet."
 DNS_ERROR_NO_PACKET,9503,0x251F,"No DNS packet."
