@@ -1,6 +1,8 @@
 # Splunk on Security Onion
 
 ### Updates
+- 12 May 2020
+	- added a lookup table for [Windows System Error Codes](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes); these are useful for things like Sysmon's Event Code 22 field "QueryStatus" or other places where error codes occur
 - 11 May 2020
 	- updated the Sysmon config
 	- updated Sysmon install notes below (notably the removal of "-n")
