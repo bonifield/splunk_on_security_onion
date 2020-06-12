@@ -349,7 +349,7 @@ ERROR_PNP_RESTART_ENUMERATION,636,0x27C,"A device was removed so enumeration mus
 ERROR_SYSTEM_IMAGE_BAD_SIGNATURE,637,0x27D,"{Fatal System Error} The system image %s is not properly signed. The file has been replaced with the signed file. The system has been shut down."
 ERROR_PNP_REBOOT_REQUIRED,638,0x27E,"Device will not start without a reboot."
 ERROR_INSUFFICIENT_POWER,639,0x27F,"There is not enough power to complete the requested operation."
-ERROR_MULTIPLE_FAULT_VIOLATION,640,0x280
+ERROR_MULTIPLE_FAULT_VIOLATION,640,0x280,""
 ERROR_SYSTEM_SHUTDOWN,641,0x281,"The system is in the process of shutting down."
 ERROR_PORT_NOT_SET,642,0x282,"An attempt to remove a processes DebugPort was made but a port was not already associated with the process."
 ERROR_DS_VERSION_CHECK_FAILURE,643,0x283,"This version of Windows is not compatible with the behavior version of directory forest domain or domain controller."
