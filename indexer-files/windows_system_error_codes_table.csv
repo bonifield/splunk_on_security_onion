@@ -356,7 +356,7 @@
 "ERROR_RANGE_NOT_FOUND",644,"0x284","The specified range could not be found in the range list."
 "ERROR_NOT_SAFE_MODE_DRIVER",646,"0x286","The driver was not loaded because the system is booting into safe mode."
 "ERROR_FAILED_DRIVER_ENTRY",647,"0x287","The driver was not loaded because it failed its initialization call."
-"ERROR_DEVICE_ENUMERATION_ERROR",648,"0x288","The "%hs" encountered an error while applying power or reading the device configuration. This may be caused by a failure of your hardware or by a poor connection."
+"ERROR_DEVICE_ENUMERATION_ERROR",648,"0x288","The %hs encountered an error while applying power or reading the device configuration. This may be caused by a failure of your hardware or by a poor connection."
 "ERROR_MOUNT_POINT_NOT_RESOLVED",649,"0x289","The create operation failed because the name contained at least one mount point which resolves to a volume to which the specified device object is not attached."
 "ERROR_INVALID_DEVICE_OBJECT_PARAMETER",650,"0x28A","The device object parameter is either not a valid device object or is not attached to the volume specified by the file name."
 "ERROR_MCA_OCCURED",651,"0x28B","A Machine Check Error has occurred. Please check the system eventlog for additional information."
