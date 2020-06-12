@@ -1,4 +1,4 @@
-error_code_nameerror_code_numbererror_code_hexerror_code_description
+error_code_name,error_code_number,error_code_hex,error_code_description
 ERROR_SUCCESS,0,0x0,"The operation completed successfully."
 ERROR_INVALID_FUNCTION,1,0x1,"Incorrect function."
 ERROR_FILE_NOT_FOUND,2,0x2,"The system cannot find the file specified."
