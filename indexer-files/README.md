@@ -19,6 +19,8 @@
 	- from [Splunk documentation](https://wiki.splunk.com/Http_status.csv)
 - Impersonation_Level_table.csv
 	- for COM impersonation levels, seen in Windows Security logs
+- Logon_Type_table.csv
+	- collection of Windows logon types, seen in Windows Security logs
 - windows_system_error_codes_table.csv
 	- collection of Windows error codes from [Microsoft](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes) documentation
 
