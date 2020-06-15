@@ -10,7 +10,7 @@
 	- portions of the Sysmon section derived from this [Splunk blog](https://www.splunk.com/blog/2014/11/24/monitoring-network-traffic-with-sysmon-and-splunk.html)
 
 ## optionally installed through the Splunk web GUI
-### LOOKUP TABLES AND INSTRUCTION HAVE MOVED [HERE](https://github.com/bonifield/splunk-lookup-tables)
+- Lookup tables and instructions have moved [HERE](https://github.com/bonifield/splunk-lookup-tables)
 
 ## CUSTOM FIELD EXTRACTIONS (in addition to those parsed from the raw event)
 
