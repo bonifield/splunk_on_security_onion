@@ -1,6 +1,9 @@
 # Splunk on Security Onion
 
 ### Updates
+- 24 June 2020
+	- converted Bro terminology to Zeek where appropriate (configs and query examples)
+	- added a list of basic Sysmon table queries
 - 12 May 2020
 	- added a lookup table for [Windows System Error Codes](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes); these are useful for things like Sysmon's Event Code 22 field "QueryStatus" or other places where error codes occur
 - 11 May 2020
