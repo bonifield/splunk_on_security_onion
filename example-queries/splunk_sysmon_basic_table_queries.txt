@@ -8,7 +8,7 @@
 # https://github.com/bonifield/splunk_on_security_onion
 
 # VIEW FIELDS
-sourcetype=sysmon | fields - date* punct splunk_* | fieldsummary | fields field values | where len(values) > 2
+sourcetype=sysmon EventCode=1 | fields - date* punct splunk_* | fieldsummary | fields field values | where len(values) > 2
 
 # QUERIES
 
@@ -21,7 +21,9 @@ circle with a slash, good hide icon for dashboards:  eval hide = "&#8856;"
 # first hits (change Computer as necessary for other fields)
 sourcetype=sysmon | stats sparkline(count) AS trend, earliest(_time) AS first_hit, latest(_time) AS latest_hit, count BY Computer | eval hours_since_first_hit=(now()-first_hit)/60/60, hours_since_latest_hit=(now()-latest_hit)/60/60, first_hit=strftime(first_hit, "%x %X"), latest_hit=strftime(latest_hit, "%x %X") | table Computer trend first_hit latest_hit hours_since_first_hit hours_since_latest_hit count | sort -first_hit
 
+
 #====================
+
 
 # EventCode 1 - Process Creation
 sourcetype=sysmon EventCode=1
@@ -147,6 +149,7 @@ sourcetype=sysmon EventCode=255
 #=============
 # THESE FIELDS ARE NOT ORGANIZED, PURELY A LIST OF INTERESTING THINGS BUT IT IS NOT ALL-INCLUSIVE
 #=============
+
 
 # winnetmon
 sourcetype=winnetmon
