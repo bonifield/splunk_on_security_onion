@@ -52,17 +52,18 @@
 ### If using Ubuntu and not Security Onion, this requires that Zeek (Bro) produce logs in JSON format, and the monitor paths be changed as necessary in the server's inputs.conf file.  Otherwise, all configurations should work exactly the same.
 
 ### TODO
-- Field modifications:  CEF compliance, better extractions (index-time and search-time), MORE extractions/fixes as needed (there are definitely some I missed)
+- ...make an app?
+- Field modifications:  ~~CEF~~ Elastic Common Schema compliance and field name fixes, better extractions (index-time and search-time), MORE extractions/fixes as needed (there are definitely some I missed)
+- Split winsec, winapp, winsys into their own indexes, as opposed to all being rolled into winevt
 - Create scripts and/or GPOs to install the forwarders across a network
-- Actually utilize Splunk's ability to create new (non-default) certificates when deploying to hosts
+- Utilize Splunk's ability to create new (non-default) certificates when deploying to hosts
 - Add hardening guide (unlikely)
 - ~~Intermediate forwarders (because the whole network does NOT need direct access to Security Onion...)~~
 - Repo for Win/Sysmon on ELK, the exact reverse of this project
-- Snort and OSSEC parsers
+- Snort and OSSEC parsers (TAs are being updated though so maybe not)
 - Custom Python scripts that enrich the indexes, provide lookups, API calls, etc 
 - Visual map of how these configs interact with each other
 - Automate and/or containerize
-- ...make an app?
 
 ## INSTRUCTIONS
 
@@ -82,10 +83,10 @@ sudo /opt/splunk/bin/splunk start
 ```
 Settings --> Server Settings --> General Settings --> Enable SSL (HTTPS) in Splunk Web? --> YES
 ```
-- Log back into Splunk and create three new indexes: bro, sysmon, and winevt
+- Log back into Splunk and create four new indexes: zeek, sysmon, winevt, splunkmon
 	- Change other options as desired, but it's extremely unlikely you won't need to for a home/small business setting
 ```
-Settings --> Indexes --> New Index --> Index Name:  bro --> Save
+Settings --> Indexes --> New Index --> Index Name:  zeek --> Save
                          New Index --> Index Name:  sysmon --> Save
                          New Index --> Index Name:  winevt --> Save
                          New Index --> Index Name:  splunkmon --> Save
@@ -118,7 +119,7 @@ sudo ufw allow proto tcp from [host-ip] to [indexer-ip] port 9997
 ### On Endpoints
 - Place [sysmon](https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon) on the host, somewhere users don't have access to (NOT C:\Users)
 - Place sysmon-config-sosalpha-JB-MODS.xml with sysmon, for sake of ease
-	- This configuration is a derivative of the alpha config developed by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config) and has been tuned for way more logging
+	- This configuration is a derivative of the alpha config developed by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)
 - Install Sysmon
 	- or better yet, use a GPO
 	- NOTE - in April 2020, the "-n" flag was deprecated; network logging can only be enabled via configuration ([source](https://twitter.com/CipherMonger/status/1257367319434715138))
