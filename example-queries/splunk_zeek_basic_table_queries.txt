@@ -86,6 +86,9 @@ sourcetype=zeek_ssh | fillnull value=- | table _time uid src_ip dest_ip src_port
 # zeek_ssl
 sourcetype=zeek_ssl OR (sourcetype=zeek_notice msg="*SSL*") | fillnull value=- | eval array = split(server_name,"."), server_name_subdomain = mvjoin(mvindex(array,0,-3),"."), server_name_domain = mvjoin(mvindex(array,-2,-1),"."), server_name_tld = if(mvcount(array)>=2,mvindex(array,-1),"-") | table _time sourcetype uid src_ip dest_ip src_port dest_port version server_name note msg sub server_name_subdomain server_name_domain server_name_tld last_alert validation_status client_subject subject client_issuer issuer established resumed ja3 ja3s curve cert_chain_fuids client_cert_chain_fuids | sort -_time
 
+# zeek_syslog
+sourcetype=zeek_syslog | fillnull value=- | table _time proto facility severity src_ip src_device src_mac message | sort -_time
+
 # zeek_tunnel
 sourcetype=zeek_tunnel | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action tunnel_type | sort -_time
 
