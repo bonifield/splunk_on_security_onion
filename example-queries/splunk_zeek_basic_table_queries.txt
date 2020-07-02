@@ -25,12 +25,15 @@ orig_bytes resp_bytes orig_ip_bytes resp_ip_bytes orig_pkts resp_pkts missed_byt
 # zeek_capture_loss
 sourcetype=zeek_capture_loss | fillnull value=- | table _time acks gaps peer percent_lost ts_delta | sort -percent_lost
 
+# zeek_dce_rpc
+sourcetype=zeek_dce_rpc | fillnull value=- | table _time ts uid src_ip dest_ip src_port dest_port endpoint named_pipe operation rtt | sort -_time
+
+# zeek_dhcp
+sourcetype=zeek_dhcp | fillnull value=- | table _time mac host_name client_fqdn domain client_addr requested_addr assigned_addr server_addr lease_time msg_types duration uids | sort -_time
+
 # zeek_dns
 sourcetype=zeek_dns | fillnull value=- | table _time uid proto src_ip dest_ip src_port dest_port qtype_name query answers auth addl rcode_name rejected rtt qclass qclass_name qtype rcode AA TC RD RA Z | sort -_time
 # counts by host
-
-# zeek_dce_rpc
-sourcetype=zeek_dce_rpc | fillnull value=- | table _time ts uid src_ip dest_ip src_port dest_port endpoint named_pipe operation rtt | sort -_time
 
 # zeek_dpd
 sourcetype=zeek_dpd | fillnull value=- | table _time uid proto analyzer src_ip dest_ip src_port dest_port failure_reason | sort -_time
