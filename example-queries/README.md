@@ -3,6 +3,9 @@
 
 ### TODO - paste those queries here, instead of inside individual files
 
+### 06 July 2020
+- added all example queries to a dashboard that can be copied directly into Splunk for easier reference
+
 ### Randoms
 - Image = official term for a compiled binary file
 - Subject_* = the one performing the action in question; the account requesting a logon (service, user, etc) but NOT the actual account logging on
