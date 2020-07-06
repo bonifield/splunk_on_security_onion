@@ -1,0 +1,334 @@
+<form>
+	<label>Example Query Dashboard</label>
+	<fieldset submitButton="false">
+		<input type="radio" token="radioBox" searchWhenChanged="false">
+			<label>Show Example Queries</label>
+			<default>None</default>
+			<choice value="Sysmon">Sysmon</choice>
+			<choice value="WinEvt">Win*</choice>
+			<choice value="Zeek">Zeek</choice>
+			<choice value="None">None</choice>
+			<change>
+				<condition value="Sysmon">
+					<set token="showSysmon">True</set>
+					<unset token="showZeek"></unset>
+					<unset token="showWinEvt"></unset>
+				</condition>
+				<condition value="Zeek">
+					<set token="showZeek">True</set>
+					<unset token="showSysmon"></unset>
+					<unset token="showWinEvt"></unset>
+				</condition>
+				<condition value="WinEvt">
+					<set token="showWinEvt">True</set>
+					<unset token="showSysmon"></unset>
+					<unset token="showZeek"></unset>
+				</condition>
+				<condition value="None">
+					<unset token="showSysmon"></unset>
+					<unset token="showZeek"></unset>
+					<unset token="showWinEvt"></unset>
+				</condition>
+			</change>
+		</input>
+	</fieldset>
+
+	<row depends="$showSysmon$">
+		<html>
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+<br/>
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+<br/>
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+<br/>
+
+<br/># NOT ALL EVENT CODES REPRESENTED, WILL ADD MORE AS TUNING EVOLVES<br/>
+
+<br/># VIEW FIELDS<br/>
+sourcetype=sysmon EventCode=1 | fields - date* punct splunk_* | fieldsummary | fields field values | where len(values) > 2<br/>
+
+<br/># QUERIES<br/>
+
+<br/># internal only<br/>
+| where cidrmatch("10.0.0.0/8", src_ip) AND cidrmatch("10.0.0.0/8", dest_ip)
+
+<br/>quotes in a token - &quot;<br/>
+circle with a slash, good hide icon for dashboards:  eval hide = "&#8856;"<br/>
+
+<br/># first hits (change Computer as necessary for other fields)<br/>
+sourcetype=sysmon | stats sparkline(count) AS trend, earliest(_time) AS first_hit, latest(_time) AS latest_hit, count BY Computer | eval hours_since_first_hit=(now()-first_hit)/60/60, hours_since_latest_hit=(now()-latest_hit)/60/60, first_hit=strftime(first_hit, "%x %X"), latest_hit=strftime(latest_hit, "%x %X") | table Computer trend first_hit latest_hit hours_since_first_hit hours_since_latest_hit count | sort -first_hit<br/>
+<br/>
+
+#====================<br/>
+
+
+<br/># EventCode 1 - Process Creation<br/>
+sourcetype=sysmon EventCode=1
+| table UtcTime _time EventCode EventCodeName Computer User UserDomain UserName CurrentDirectory OriginalFileName ParentImage Image ParentCommandLine CommandLine Description FileVersion Product LogonGuid ParentProcessGuid ProcessGuid ParentProcessId ProcessId ParentImageName ImageName ParentImageNameExt ImageNameExt RuleName SecurityID IMPHASH MD5 SHA256
+| sort -_time<br/>
+<br/># note presence of clean, und, and short fields in fieldsummary, which are to be used for dashboard drilldowns and panels
+
+
+<br/># EventCode 2 - Process Changed a File Creation Time<br/>
+sourcetype=sysmon EventCode=2
+| table UtcTime _time EventCode EventCodeName Computer CreationUtcTime PreviousCreationUtcTime Image TargetFilename ImageName ImageNameExt TargetFilenameName TargetFilenameNameExt RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 3 - Network Connection<br/>
+sourcetype=sysmon EventCode=3
+| table UtcTime _time EventCode EventCodeName Computer User Protocol Initiated src_ip dest_ip src_port dest_port ProcessId ProcessGuid SourceIp DestinationIp SourceIsIpv6 DestinationIsIp SourceHostname DestinationHostname SourcePort DestinationPort SourcePortName DestinationPortName RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 4 - Sysmon Service State Changed<br/>
+sourcetype=sysmon EventCode=4
+| table UtcTime _time EventCode EventCodeName Computer SchemaVersion State Task RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 5 - Process Terminated<br/>
+sourcetype=sysmon EventCode=5
+| table UtcTime _time EventCode EventCodeName Computer Image ProcessId ProcessGuid RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 6 - Driver Loaded<br/>
+sourcetype=sysmon EventCode=6
+| table UtcTime _time EventCode EventCodeName Computer ImageLoaded Signature SignatureStatus Signed RuleName SecurityID IMPHASH MD5 SHA256
+| sort -_time<br/>
+
+
+<br/># EventCode 7 - Image Loaded<br/>
+sourcetype=sysmon EventCode=7
+| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 8 - CreateRemoteThread<br/>
+sourcetype=sysmon EventCode=8
+| table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName SourceProcessId TargetProcessId NewThreadId RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 9 - RawAccessRead<br/>
+sourcetype=sysmon EventCode=9
+| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 10 - Process Access<br/>
+sourcetype=sysmon EventCode=10
+| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 11 - FileCreate<br/>
+sourcetype=sysmon EventCode=11
+| table UtcTime _time EventCode EventCodeName Computer CreationUtcTime Image TargetFilename ProcessId ProcessGuid RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 12 - RegistryEvent (Object Create and Delete)<br/>
+sourcetype=sysmon EventCode=12
+| table UtcTime _time EventCode EventCodeName Computer Image TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 13 - RegistryEvent (Value Set)<br/>
+sourcetype=sysmon EventCode=13
+| table UtcTime _time EventCode EventCodeName Computer Image ImageName ImageNameExt Details TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject ProcessId ProcessGuid RuleName SecurityID
+| sort -_time<br/>
+<br/># Last Logged On User<br/>
+sourcetype=sysmon EventCode=13 TargetObject="HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\LastLoggedOnUser"
+| table UtcTime _time Computer TargetObject Details ProcessId ProcessGuid RuleName SecurityID
+| sort -_time<br/>
+# OR<br/>
+| stats count by Details<br/>
+
+
+<br/># EventCode 14 - RegistryEvent (Key and Value Rename)<br/>
+sourcetype=sysmon EventCode=14
+| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 15 - FileCreateStreamHash<br/>
+sourcetype=sysmon EventCode=15
+| table UtcTime _time EventCode EventCodeName Computer CreationUtcTime Image TargetFilename ImageName TargetFilenameName ProcessId ProcessGuid RuleName SecurityID IMPHASH SHA256 MD5
+| sort -_time<br/>
+
+
+<br/># EventCode 16 - Sysmon Configuration Change<br/>
+sourcetype=sysmon EventCode=16
+| table UtcTime _time EventCode EventCodeName Computer Configuration ConfigurationFileHash RuleName SecurityID SHA1
+| sort -_time<br/>
+
+
+<br/># EventCode 22 - DNSEvent (DNS query)<br/>
+sourcetype=sysmon EventCode=22
+| table UtcTime _time EventCode EventCodeName Computer Image ImageName QueryStatus QueryName QueryResults ProcessId ProcessGuid RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 23 - File Delete<br/>
+sourcetype=sysmon EventCode=23
+| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| sort -_time<br/>
+
+
+<br/># EventCode 255 - Error<br/>
+sourcetype=sysmon EventCode=255
+| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| sort -_time<br/>
+
+		</html>
+	</row>
+
+	<row depends="$showWinEvt$">
+		<html>
+<br/>#=============
+<br/># THESE FIELDS ARE NOT ORGANIZED, PURELY A LIST OF INTERESTING THINGS BUT IT IS NOT ALL-INCLUSIVE
+<br/>#=============<br/>
+
+<br/># winapp<br/>
+sourcetype=winapp
+| table _time EventCode EventType EventName ComputerName Device Faulting_application_path Faulting_package_full_name Faulting_module_name Faulting_module_path IP_address MAC_address Keywords Message
+| sort -_time<br/>
+
+<br/># winnetmon<br/>
+sourcetype=winnetmon
+| table _time host UserName AddressFamily Direction PacketType Protocol ProcessName LocalAddress RemoteAddress LocalPort RemotePort RemoteHostName UserSid HeaderSizeBytes TransportHeaderSizeBytes IPsecProtected 
+| sort -_time<br/>
+
+<br/># winps<br/>
+sourcetype=winps
+| table _time EventCode EventType ComputerName User Type TaskCategory Keywords ScriptBlock_ID Message Sid
+| sort -_time<br/>
+
+<br/># winsec<br/>
+sourcetype=winsec
+| table _time EventCode Message_Title ProcessName Workstation_Name Process_ID src_ip src_port Affected_*     Account_Domain Account_Name FileName *_Security_ID Logon_* New_Logon_*
+| sort -_time<br/>
+# good for making lookups<br/>
+| stats count by EventCode Message_Title | sort +EventCode<br/>
+
+<br/># winsys<br/>
+sourcetype=winsys
+| table _time EventCode EventType EventName ComputerName Type Service_Account Service_Name Service_File_Name Change_Reason Keywords Process Module_Path QueryName Reason Message
+| sort -_time<br/>
+<br/># note<br/>
+Wake_Time Wake_Source Sleep_Time Sleep_Reason Shutdown_Type Shutdown_Reason
+		</html>
+	</row>
+
+	<row depends="$showZeek$">
+		<html>
+
+
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+<br/>
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+<br/>
+# PURELY A LIST OF INTERESTING FIELDS, THIS IS NOT AN ANALYSIS GUIDE
+<br/>
+<br/># VIEW FIELDS<br/>
+sourcetype=zeek_conn | fields - date* punct splunk_* | fieldsummary | fields field values | where len(values) > 2
+<br/>
+<br/># QUERIES<br/>
+<br/>
+# internal only<br/>
+| where cidrmatch("10.0.0.0/8", src_ip) AND cidrmatch("10.0.0.0/8", dest_ip)
+<br/>
+quotes in a token - &amp;quot;<br/>
+circle with a slash, good hide icon for dashboards:  eval hide = "&amp;#8856;"<br/>
+<br/>
+# first hits (change FIELD-GOES-HERE as necessary and by sourcetype)<br/>
+sourcetype=zeek_conn | stats sparkline(count) AS trend, earliest(_time) AS first_hit, latest(_time) AS latest_hit, count BY FIELD-GOES-HERE | eval hours_since_first_hit=(now()-first_hit)/60/60, hours_since_latest_hit=(now()-latest_hit)/60/60, first_hit=strftime(first_hit, "%x %X"), latest_hit=strftime(latest_hit, "%x %X") | table FIELD-GOES-HERE trend first_hit latest_hit hours_since_first_hit hours_since_latest_hit count | sort -first_hit
+<br/><br/>
+#====================
+<br/>
+<br/># zeek_conn<br/>
+sourcetype=zeek_conn | fillnull value=- | table _time uid proto service src_ip dest_ip src_port dest_port conn_state conn_state_description history 
+orig_bytes resp_bytes orig_ip_bytes resp_ip_bytes orig_pkts resp_pkts missed_bytes | sort -_time
+<br/>
+<br/># zeek_capture_loss<br/>
+sourcetype=zeek_capture_loss | fillnull value=- | table _time acks gaps peer percent_lost ts_delta | sort -percent_lost
+<br/>
+<br/># zeek_dce_rpc<br/>
+sourcetype=zeek_dce_rpc | fillnull value=- | table _time ts uid src_ip dest_ip src_port dest_port endpoint named_pipe operation rtt | sort -_time
+<br/>
+<br/># zeek_dhcp<br/>
+sourcetype=zeek_dhcp | fillnull value=- | table _time mac host_name client_fqdn domain client_addr requested_addr assigned_addr server_addr lease_time msg_types duration uids | sort -_time
+<br/>
+<br/># zeek_dns<br/>
+sourcetype=zeek_dns | fillnull value=- | table _time uid proto src_ip dest_ip src_port dest_port qtype_name query answers auth addl rcode_name rejected rtt qclass qclass_name qtype rcode AA TC RD RA Z | sort -_time
+# counts by host
+<br/>
+<br/># zeek_dpd<br/>
+sourcetype=zeek_dpd | fillnull value=- | table _time uid proto analyzer src_ip dest_ip src_port dest_port failure_reason | sort -_time
+<br/>
+<br/># zeek_files<br/>
+sourcetype=zeek_files | fillnull value=- | table _time conn_uids fuid src_ip dest_ip is_orig local_orig mime_type analyzers depth duration filename extracted missing_bytes overflow_bytes seen_bytes total_bytes md5 sha1 | sort -_time
+<br/>
+<br/># zeek_ftp<br/>
+sourcetype=zeek_ftp | fillnull value=- | table _time uid user command reply_code reply_msg mime_type arg file_size src_ip dest_ip src_port dest_port data_channel_src_ip data_channel_dest_ip data_channel_dest_port data_channel_passive fuid | sort -_time
+<br/>
+<br/># zeek_http<br/>
+sourcetype=zeek_http | fillnull value=- | rex field=uri "\.(?&lt;extension&gt;[^\.]*$)" | table _time uid src_ip dest_ip src_port dest_port method status_code status_msg host http_host uri extension user_agent referrer version proxied orig_mime_types resp_mime_types orig_filenames resp_filenames orig_fuids resp_fuids request_body_len response_body_len info_code info_msg | sort -_time
+<br/>
+<br/># zeek_irc<br/>
+sourcetype=zeek_irc | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port nick user command dcc_file_name dcc_file_size value | sort -_time
+<br/>
+<br/># zeek_kerberos<br/>
+sourcetype=zeek_kerberos | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port service request_type kerberos_success error_msg client client_cert_subject server_cert_subject email_from forwardable renewable cipher client_cert_fuid server_cert_fuid valid_until | sort -_time
+<br/>
+<br/># zeek_mysql<br/>
+sourcetype=zeek_mysql | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port mysql_success mysql_command mysql_arg response rows | sort -_time
+<br/>
+<br/># zeek_notice<br/>
+sourcetype=zeek_notice | fillnull value=- | table _time uid proto src_ip dest_ip src_port dest_port peer_descr dropped note msg sub | sort -_time
+<br/>
+<br/># zeek_rdp<br/>
+sourcetype=zeek_rdp | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port result client_name cert_type cert_count cert_permanent client_build client_digital_product_id desktop_height desktop_width encryption_level encryption_method keyboard_layout requested_color_depth | sort -_time
+<br/>
+<br/># zeek_sip<br/>
+sourcetype=zeek_sip | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port call_id method request_from response_to request_path response_path seq status_code status_msg uri user_agent content_type warning request_body_len response_body_len | sort -_time
+<br/>
+<br/># zeek_smb_files<br/>
+sourcetype=zeek_smb_files | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action name path size times.accessed times.changed times.created times.modified | sort -_time
+<br/>
+<br/># zeek_smb_mapping<br/>
+sourcetype=zeek_smb_mapping | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port service share_type path native_file_system | sort -_time
+<br/>
+<br/># zeek_smtp<br/>
+sourcetype=zeek_smtp | fillnull value=- | table _time uid from to cc recipient_to subject helo last_reply tls user_agent reply_to in_reply_to x_originating_ip first_received second_received path is_webmail src_ip dest_ip src_port dest_port | sort -_time
+<br/>
+<br/># zeek_snmp<br/>
+sourcetype=zeek_snmp | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port community display_string duration version get_bulk_requests get_requests get_responses set_requests up_since | sort -_time
+<br/>
+<br/># zeek_socks<br/>
+sourcetype=zeek_socks | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port user server_status bound_host bound_port request_host request_port request_name version | sort -_time
+<br/>
+<br/># zeek_software<br/>
+sourcetype=zeek_software | fillnull value=- | table _time src_ip src_port name software_type unparsed_version version_major version_minor version_minor2 version_minor3 version_additional_info | sort -_time
+<br/>
+<br/># zeek_ssh<br/>
+sourcetype=zeek_ssh | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port client server auth_attempts hassh hasshServer host_key cipher_alg compression_alg cshka hasshAlgorithms hasshServerAlgorithms hasshVersion host_key_alg kex_alg ma_alg sshka version | sort -_time
+<br/>
+<br/># zeek_ssl<br/>
+sourcetype=zeek_ssl OR (sourcetype=zeek_notice msg="*SSL*") | fillnull value=- | eval array = split(server_name,"."), server_name_subdomain = mvjoin(mvindex(array,0,-3),"."), server_name_domain = mvjoin(mvindex(array,-2,-1),"."), server_name_tld = if(mvcount(array)>=2,mvindex(array,-1),"-") | table _time sourcetype uid src_ip dest_ip src_port dest_port version server_name note msg sub server_name_subdomain server_name_domain server_name_tld last_alert validation_status client_subject subject client_issuer issuer established resumed ja3 ja3s curve cert_chain_fuids client_cert_chain_fuids | sort -_time
+<br/>
+<br/># zeek_syslog<br/>
+sourcetype=zeek_syslog | fillnull value=- | table _time proto facility severity src_ip src_device src_mac message | sort -_time
+<br/>
+<br/># zeek_tunnel<br/>
+sourcetype=zeek_tunnel | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port action tunnel_type | sort -_time
+<br/>
+<br/># zeek_weird<br/>
+sourcetype=zeek_weird | fillnull value=- | table _time uid src_ip dest_ip src_port dest_port notice name peer | sort -_time
+
+
+		</html>
+	</row>
+</form>
