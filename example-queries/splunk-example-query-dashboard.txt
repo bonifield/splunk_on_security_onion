@@ -131,7 +131,7 @@ sourcetype=sysmon EventCode=11
 
 <br/># EventCode 12 - RegistryEvent (Object Create and Delete)<br/>
 sourcetype=sysmon EventCode=12
-| table UtcTime _time EventCode EventCodeName Computer Image TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject RuleName SecurityID
+| table UtcTime _time EventCode EventCodeName Computer Image TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject ProcessGuid ProcessId RuleName SecurityID
 | sort -_time<br/>
 
 
