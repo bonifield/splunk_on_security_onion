@@ -64,7 +64,7 @@ sourcetype=sysmon EventCode=6
 
 # EventCode 7 - Image Loaded
 sourcetype=sysmon EventCode=7
-| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| table UtcTime _time EventCode EventCodeName Computer OriginalFileName Image ImageLoaded Signed Version Company Description Signature RuleName SecurityID IMPHASH MD5 SHA256
 | sort -_time
 
 
@@ -82,7 +82,7 @@ sourcetype=sysmon EventCode=9
 
 # EventCode 10 - Process Access
 sourcetype=sysmon EventCode=10
-| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
+| table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage RuleName GrantedAccess CallTrace SecurityID SourceProcessId TargetProcessId SourceProcessGuid TargetProcessGuid 
 | sort -_time
 
 
@@ -125,6 +125,18 @@ sourcetype=sysmon EventCode=15
 # EventCode 16 - Sysmon Configuration Change
 sourcetype=sysmon EventCode=16
 | table UtcTime _time EventCode EventCodeName Computer Configuration ConfigurationFileHash RuleName SecurityID SHA1
+| sort -_time
+
+
+# EventCode 17 - PipeEvent (Pipe Created)
+sourcetype=sysmon EventCode=17
+| table UtcTime _time EventCode EventCodeName Computer Image PipeName ProcessId ProcessGuid RuleName SecurityID
+| sort -_time
+
+
+# EventCode 18 - PipeEvent (Pipe Connected)
+sourcetype=sysmon EventCode=18
+| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
 | sort -_time
 
 
