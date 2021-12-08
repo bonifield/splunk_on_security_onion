@@ -54,7 +54,7 @@ sourcetype=sysmon EventCode=8 | table UtcTime _time EventCode EventCodeName Comp
 sourcetype=sysmon EventCode=9 | table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID | sort -_time
 
 # EventCode 10 - Process Access
-sourcetype=sysmon EventCode=10 | table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName GrantedAccess Keywords RuleName SecurityID | sort -_time
+sourcetype=sysmon EventCode=10 | table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName GrantedAccess CallTrace Keywords RuleName SecurityID | sort -_time
 
 # EventCode 11 - FileCreate
 sourcetype=sysmon EventCode=11 | table UtcTime _time EventCode EventCodeName Computer CreationUtcTime Image TargetFilename ProcessId ProcessGuid RuleName SecurityID | sort -_time
