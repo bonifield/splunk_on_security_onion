@@ -5,6 +5,9 @@
 - paste those queries here, instead of inside individual files
 - map to Elastic Common Schema
 
+### 07 Dec 2021
+- minor updates and field corrections to the example dashboard and queries
+
 ### 06 July 2020
 - added all example queries to a dashboard that can be copied directly into Splunk for easier reference
 
