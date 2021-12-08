@@ -119,7 +119,7 @@ sourcetype=sysmon EventCode=9
 
 <br/># EventCode 10 - Process Access<br/>
 sourcetype=sysmon EventCode=10
-| table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName GrantedAccess Keywords RuleName SecurityID
+| table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName GrantedAccess CallTrace Keywords RuleName SecurityID
 | sort -_time<br/>
 
 
