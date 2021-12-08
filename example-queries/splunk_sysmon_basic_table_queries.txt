@@ -26,136 +26,73 @@ sourcetype=sysmon | stats sparkline(count) AS trend, earliest(_time) AS first_hi
 
 
 # EventCode 1 - Process Creation
-sourcetype=sysmon EventCode=1
-| table UtcTime _time EventCode EventCodeName Computer User UserDomain UserName CurrentDirectory OriginalFileName ParentImage Image ParentCommandLine CommandLine Description FileVersion Product LogonGuid ParentProcessGuid ProcessGuid ParentProcessId ProcessId ParentImageName ImageName ParentImageNameExt ImageNameExt RuleName SecurityID IMPHASH MD5 SHA256
-| sort -_time
+sourcetype=sysmon EventCode=1 | table UtcTime _time EventCode EventCodeName Computer User UserDomain UserName CurrentDirectory OriginalFileName ParentImage Image ParentCommandLine CommandLine Description FileVersion Product LogonGuid ParentProcessGuid ProcessGuid ParentProcessId ProcessId ParentImageName ImageName ParentImageNameExt ImageNameExt RuleName SecurityID IMPHASH MD5 SHA256 | sort -_time
 # note presence of clean, und, and short fields in fieldsummary, which are to be used for dashboard drilldowns and panels
 
-
 # EventCode 2 - Process Changed a File Creation Time
-sourcetype=sysmon EventCode=2
-| table UtcTime _time EventCode EventCodeName Computer CreationUtcTime PreviousCreationUtcTime Image TargetFilename ImageName ImageNameExt TargetFilenameName TargetFilenameNameExt RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=2 | table UtcTime _time EventCode EventCodeName Computer CreationUtcTime PreviousCreationUtcTime Image TargetFilename ImageName ImageNameExt TargetFilenameName TargetFilenameNameExt RuleName SecurityID | sort -_time
 
 # EventCode 3 - Network Connection
-sourcetype=sysmon EventCode=3
-| table UtcTime _time EventCode EventCodeName Computer User Protocol Initiated src_ip dest_ip src_port dest_port ProcessId ProcessGuid SourceIp DestinationIp SourceIsIpv6 DestinationIsIp SourceHostname DestinationHostname SourcePort DestinationPort SourcePortName DestinationPortName RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=3 | table UtcTime _time EventCode EventCodeName Computer User Protocol Initiated src_ip dest_ip src_port dest_port ProcessId ProcessGuid SourceIp DestinationIp SourceIsIpv6 DestinationIsIp SourceHostname DestinationHostname SourcePort DestinationPort SourcePortName DestinationPortName RuleName SecurityID | sort -_time
 
 # EventCode 4 - Sysmon Service State Changed
-sourcetype=sysmon EventCode=4
-| table UtcTime _time EventCode EventCodeName Computer SchemaVersion State Task RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=4 | table UtcTime _time EventCode EventCodeName Computer SchemaVersion State Task RuleName SecurityID | sort -_time
 
 # EventCode 5 - Process Terminated
-sourcetype=sysmon EventCode=5
-| table UtcTime _time EventCode EventCodeName Computer Image ProcessId ProcessGuid RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=5 | table UtcTime _time EventCode EventCodeName Computer Image ProcessId ProcessGuid RuleName SecurityID | sort -_time
 
 # EventCode 6 - Driver Loaded
-sourcetype=sysmon EventCode=6
-| table UtcTime _time EventCode EventCodeName Computer ImageLoaded Signature SignatureStatus Signed RuleName SecurityID IMPHASH MD5 SHA256
-| sort -_time
-
+sourcetype=sysmon EventCode=6 | table UtcTime _time EventCode EventCodeName Computer ImageLoaded Signature SignatureStatus Signed RuleName SecurityID IMPHASH MD5 SHA256 | sort -_time
 
 # EventCode 7 - Image Loaded
-sourcetype=sysmon EventCode=7
-| table UtcTime _time EventCode EventCodeName Computer OriginalFileName Image ImageLoaded Signed Version Company Description Signature RuleName SecurityID IMPHASH MD5 SHA256
-| sort -_time
-
+sourcetype=sysmon EventCode=7 | table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID | sort -_time
 
 # EventCode 8 - CreateRemoteThread
-sourcetype=sysmon EventCode=8
-| table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName SourceProcessId TargetProcessId NewThreadId RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=8 | table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName SourceProcessId TargetProcessId NewThreadId RuleName SecurityID | sort -_time
 
 # EventCode 9 - RawAccessRead
-sourcetype=sysmon EventCode=9
-| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=9 | table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID | sort -_time
 
 # EventCode 10 - Process Access
-sourcetype=sysmon EventCode=10
-| table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage RuleName GrantedAccess CallTrace SecurityID SourceProcessId TargetProcessId SourceProcessGuid TargetProcessGuid 
-| sort -_time
-
+sourcetype=sysmon EventCode=10 | table UtcTime _time EventCode EventCodeName Computer SourceImage TargetImage SourceImageName TargetImageName GrantedAccess Keywords RuleName SecurityID | sort -_time
 
 # EventCode 11 - FileCreate
-sourcetype=sysmon EventCode=11
-| table UtcTime _time EventCode EventCodeName Computer CreationUtcTime Image TargetFilename ProcessId ProcessGuid RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=11 | table UtcTime _time EventCode EventCodeName Computer CreationUtcTime Image TargetFilename ProcessId ProcessGuid RuleName SecurityID | sort -_time
 
 # EventCode 12 - RegistryEvent (Object Create and Delete)
-sourcetype=sysmon EventCode=12
-| table UtcTime _time EventCode EventCodeName Computer Image TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject ProcessGuid ProcessId RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=12 | table UtcTime _time EventCode EventCodeName Computer Image TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject ProcessGuid ProcessId RuleName SecurityID | sort -_time
 
 # EventCode 13 - RegistryEvent (Value Set)
-sourcetype=sysmon EventCode=13
-| table UtcTime _time EventCode EventCodeName Computer Image ImageName ImageNameExt Details TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject ProcessId ProcessGuid RuleName SecurityID
-| sort -_time
+sourcetype=sysmon EventCode=13 | table UtcTime _time EventCode EventCodeName Computer Image ImageName ImageNameExt Details TargetObjectRootKey TargetObjectRootKeyExpanded TargetObject ProcessId ProcessGuid RuleName SecurityID | sort -_time
+
 # Last Logged On User
-sourcetype=sysmon EventCode=13 TargetObject="HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\LastLoggedOnUser"
-| table UtcTime _time Computer TargetObject Details ProcessId ProcessGuid RuleName SecurityID
-| sort -_time
+sourcetype=sysmon EventCode=13 TargetObject="HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\LastLoggedOnUser" | table UtcTime _time Computer TargetObject Details ProcessId ProcessGuid RuleName SecurityID | sort -_time
 # OR
 | stats count by Details
 
-
 # EventCode 14 - RegistryEvent (Key and Value Rename)
-sourcetype=sysmon EventCode=14
-| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=14 | table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID | sort -_time
 
 # EventCode 15 - FileCreateStreamHash
-sourcetype=sysmon EventCode=15
-| table UtcTime _time EventCode EventCodeName Computer CreationUtcTime Image TargetFilename ImageName TargetFilenameName ProcessId ProcessGuid RuleName SecurityID IMPHASH SHA256 MD5
-| sort -_time
-
+sourcetype=sysmon EventCode=15 | table UtcTime _time EventCode EventCodeName Computer CreationUtcTime Image TargetFilename ImageName TargetFilenameName ProcessId ProcessGuid RuleName SecurityID IMPHASH SHA256 MD5 | sort -_time
 
 # EventCode 16 - Sysmon Configuration Change
-sourcetype=sysmon EventCode=16
-| table UtcTime _time EventCode EventCodeName Computer Configuration ConfigurationFileHash RuleName SecurityID SHA1
-| sort -_time
-
+sourcetype=sysmon EventCode=16 | table UtcTime _time EventCode EventCodeName Computer Configuration ConfigurationFileHash RuleName SecurityID SHA1 | sort -_time
 
 # EventCode 17 - PipeEvent (Pipe Created)
-sourcetype=sysmon EventCode=17
-| table UtcTime _time EventCode EventCodeName Computer Image PipeName ProcessId ProcessGuid RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=17 | table UtcTime _time EventCode EventCodeName Computer Image ImageName PipeName ProcessId ProcessGuid RuleName SecurityID | sort -_time
 
 # EventCode 18 - PipeEvent (Pipe Connected)
-sourcetype=sysmon EventCode=18
-| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=18 | table UtcTime _time EventCode EventCodeName Computer Image ImageName PipeName ProcessId ProcessGuid RuleName SecurityID | sort -_time
 
 # EventCode 22 - DNSEvent (DNS query)
-sourcetype=sysmon EventCode=22
-| table UtcTime _time EventCode EventCodeName Computer Image ImageName QueryStatus QueryName QueryResults ProcessId ProcessGuid RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=22 | table UtcTime _time EventCode EventCodeName Computer Image ImageName QueryStatus QueryName QueryResults ProcessId ProcessGuid RuleName SecurityID | sort -_time
 
 # EventCode 23 - File Delete
-sourcetype=sysmon EventCode=23
-| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
-| sort -_time
-
+sourcetype=sysmon EventCode=23 | table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID | sort -_time
 
 # EventCode 255 - Error
-sourcetype=sysmon EventCode=255
-| table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID
-| sort -_time
+sourcetype=sysmon EventCode=255 | table UtcTime _time EventCode EventCodeName Computer RuleName SecurityID | sort -_time
 
 
 #=============
