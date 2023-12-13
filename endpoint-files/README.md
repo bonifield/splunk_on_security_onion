@@ -24,7 +24,20 @@
 ```
 sc config SplunkForwarder start=auto
 ```
- 
+
+### Extra - enable PS logging via registry
+```
+# module logging
+New-Item –Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell" –Name ModuleLogging -Force
+Set-Itemproperty -path 'HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging' -Name 'EnableModuleLogging' -Value '1'
+New-Item –Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging" –Name ModuleNames -Force
+Set-Itemproperty -path 'HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging\ModuleNames' -Name '*' -Value '*'
+
+# script block logging
+New-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -Name "EnableScriptBlockLogging" -Value 1
+```
+
 ### Extra - enable PS logging via GPO
 ```
 Group Policy Editor --> Computer Configuration --> Administrative Templates --> Windows Components --> Windows PowerShell
