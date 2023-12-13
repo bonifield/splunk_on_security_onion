@@ -28,6 +28,8 @@ sc config SplunkForwarder start=auto
 ### Extra - enable PS logging via GPO
 ```
 Group Policy Editor --> Computer Configuration --> Administrative Templates --> Windows Components --> Windows PowerShell
+	AND
+Group Policy Editor --> User Configuration --> Administrative Templates --> Windows Components --> Windows PowerShell
 	- Module Logging --> Edit --> Enabled
 		- Module Names --> Show
 			- Add:  *=*
